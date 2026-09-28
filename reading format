@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TOEFL Reading Mastery — 2026 Official Format</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.0/index.css"/>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#161920;
+    --panel-2:#1c2028;
+    --line:#2a2e38;
+    --ink:#e6e7ea;
+    --muted:#9096a3;
+    --accent:#d4a574;
+    --accent-2:#7fb3a8;
+    --ok:#86b88a;
+    --warn:#d4a574;
+    --err:#c87878;
+    --info:#8aa8d4;
+  }
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .glass{background:var(--panel);border:1px solid var(--line);}
+  .fade-in{animation:fade .4s ease both;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .btn{transition:all .2s ease;cursor:pointer;}
+  .btn:hover{transform:translateY(-1px);border-color:var(--accent);}
+  .choice{transition:all .15s ease;cursor:pointer;}
+  .choice:hover{border-color:var(--accent);background:rgba(212,165,116,.05)}
+  .choice.selected{border-color:var(--accent);background:rgba(212,165,116,.1)}
+  .choice.correct{border-color:var(--ok);background:rgba(134,184,138,.12)}
+  .choice.wrong{border-color:var(--err);background:rgba(200,120,120,.12)}
+  .pill{display:inline-flex;align-items:center;gap:.35rem;padding:.15rem .55rem;border-radius:999px;font-size:.7rem;font-weight:600;letter-spacing:.02em}
+  .lesson-card{transition:all .2s ease;cursor:pointer;}
+  .lesson-card:hover{transform:translateY(-2px);border-color:var(--accent);}
+  .lesson-card.active{border-color:var(--accent);background:rgba(212,165,116,.06);}
+  .lesson-card.done{border-color:var(--ok);}
+  .passage p{margin-bottom:.9rem;line-height:1.75;color:#c8ccd3}
+  .passage .para-num{color:var(--accent);font-weight:700;margin-right:.4rem}
+  details > summary{list-style:none;cursor:pointer}
+  details > summary::-webkit-details-marker{display:none}
+  .kbd{font-family:'JetBrains Mono',monospace;background:#1c2028;border:1px solid var(--line);border-bottom-width:2px;padding:.05rem .35rem;border-radius:.3rem;font-size:.75rem;color:var(--accent)}
+  .tab-btn{padding:.5rem 1rem;border-radius:.5rem;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .15s;cursor:pointer;}
+  .tab-btn.active{background:rgba(212,165,116,.12);color:var(--accent)}
+  .tab-btn:hover:not(.active){color:var(--ink)}
+  .step-badge{display:inline-flex;align-items:center;justify-content:center;width:1.75rem;height:1.75rem;border-radius:50%;background:var(--accent);color:var(--bg);font-weight:700;font-size:.8rem;margin-right:.5rem;flex-shrink:0}
+  .focus-map{position:relative;background:var(--panel-2);border:1px solid var(--line);border-radius:.75rem;padding:1rem;font-size:.85rem;line-height:1.7}
+  .hl-red{background:rgba(200,120,120,.18);color:#e8a8a8;padding:.05rem .25rem;border-radius:.2rem;border-left:2px solid var(--err)}
+  .hl-yellow{background:rgba(212,165,116,.18);color:var(--accent);padding:.05rem .25rem;border-radius:.2rem;border-left:2px solid var(--warn)}
+  .hl-blue{background:rgba(138,168,212,.18);color:#b0c4e8;padding:.05rem .25rem;border-radius:.2rem;border-left:2px solid var(--info)}
+  .hl-green{background:rgba(134,184,138,.18);color:var(--ok);padding:.05rem .25rem;border-radius:.2rem;border-left:2px solid var(--ok)}
+  .trap-card{background:var(--panel-2);border-left:3px solid var(--err);border-radius:.5rem;padding:.75rem;margin:.5rem 0}
+  .strategy-card{background:var(--panel-2);border-left:3px solid var(--accent);border-radius:.5rem;padding:.75rem;margin:.5rem 0}
+  .example-box{background:var(--bg);border:1px dashed var(--line);border-radius:.5rem;padding:1rem;margin:.75rem 0}
+  .legend-dot{display:inline-block;width:.75rem;height:.75rem;border-radius:.2rem;margin-right:.35rem}
+  .word-slot{display:inline-block;min-width:2.5rem;border-bottom:2px solid var(--accent);padding:0 .25rem;margin:0 .1rem;color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:600}
+  .quiz-module-header{background:linear-gradient(90deg,rgba(212,165,116,.1),rgba(127,179,168,.1));border:1px solid var(--accent);border-radius:.75rem;padding:1rem;margin-bottom:1rem}
+  .timer-display{font-family:'JetBrains Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--accent)}
+  .timer-display.warning{color:var(--err);animation:pulse 1s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+</style>
+</head>
+<body class="min-h-screen">
+
+<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgba(15,17,21,0.9)] backdrop-blur">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-[var(--accent)] to-[var(--accent-2)] flex items-center justify-center font-bold text-[var(--bg)]">R</div>
+      <div>
+        <div class="font-bold text-sm sm:text-base">TOEFL Reading Mastery</div>
+        <div class="text-xs text-[var(--muted)]">2026 Official Format · ETS-Aligned</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex items-center gap-2 text-xs text-[var(--muted)]">
+        <span>Progress</span>
+        <div class="w-32 h-2 bg-[var(--panel-2)] rounded-full overflow-hidden">
+          <div id="globalProgress" class="h-full bg-gradient-to-r from-[var(--accent)] to-[var(--accent-2)] transition-all" style="width:0%"></div>
+        </div>
+        <span id="globalProgressText" class="mono">0%</span>
+      </div>
+      <button id="resetBtn" class="text-xs px-3 py-1.5 rounded-md border border-[var(--line)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition">Reset</button>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6">
+
+  <aside class="lg:sticky lg:top-20 h-fit">
+    <div class="glass rounded-xl p-4">
+      <div class="text-xs uppercase tracking-wider text-[var(--muted)] mb-3">Learning Path</div>
+      <nav id="lessonNav" class="flex flex-col gap-1.5"></nav>
+    </div>
+    <div class="glass rounded-xl p-4 mt-4">
+      <div class="text-xs uppercase tracking-wider text-[var(--muted)] mb-2">Quick Stats</div>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between"><span class="text-[var(--muted)]">Lessons</span><span id="statLessons" class="mono">0/6</span></div>
+        <div class="flex justify-between"><span class="text-[var(--muted)]">Practices</span><span id="statPractices" class="mono">0/15</span></div>
+        <div class="flex justify-between"><span class="text-[var(--muted)]">Final Score</span><span id="statFinal" class="mono">—</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <main id="mainContent" class="min-h-[70vh]"></main>
+</div>
+
+<footer class="border-t border-[var(--line)] mt-10 py-6 text-center text-xs text-[var(--muted)]">
+  Based on The Official Guide to the TOEFL iBT® Test (ETS, 2026) · Aligned with 2026 Format
+</footer>
+
+<script>
+/* =========================================================
+   STATE
+========================================================= */
+const STORAGE_KEY = 'toefl-reading-mastery-v4';
+const defaultState = {
+  currentLesson: 0,
+  completed: {},
+  practiceAnswers: {},
+  quiz: null
+};
+let state;
+try {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  state = raw ? {...defaultState, ...JSON.parse(raw)} : {...defaultState};
+} catch(e) { state = {...defaultState}; }
+
+function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+/* =========================================================
+   LESSONS
+========================================================= */
+const LESSONS = [
+  { id:'welcome', title:'Welcome & Roadmap', icon:'🎯', type:'static' },
+  { id:'format', title:'The 2026 Format', icon:'📐', type:'static' },
+  { id:'tasks', title:'3 Task Types Deep Dive', icon:'📚', type:'static' },
+  { id:'questions', title:'9 Question Types + Practice', icon:'🧩', type:'static' },
+  { id:'strategies', title:'Reading Strategies', icon:'🧠', type:'static' },
+  { id:'practice', title:'Guided Practice', icon:'✍️', type:'practice' },
+  { id:'playbook', title:'Test-Day Playbook', icon:'🎮', type:'static' },
+  { id:'final', title:'Final Mock Exam', icon:'🏆', type:'quiz' }
+];
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+function goToLesson(i){
+  if(i < 0 || i >= LESSONS.length) return;
+  state.currentLesson = i;
+  saveState();
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function completeAndNext(lessonId, nextIndex){
+  state.completed[lessonId] = true;
+  saveState();
+  goToLesson(nextIndex);
+}
+
+/* =========================================================
+   WELCOME (intro first, then agenda)
+========================================================= */
+const WELCOME_HTML = `
+<div class="fade-in">
+  <div class="glass rounded-2xl p-6 sm:p-10 mb-5">
+    <div class="inline-flex items-center gap-2 pill bg-[var(--accent)]/10 text-[var(--accent)] border border-[var(--accent)]/30 mb-4">
+      <span>📘</span><span>TOEFL iBT 2026 · Reading Section</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3">Master the TOEFL Reading Section</h1>
+    <p class="text-[var(--muted)] text-lg mb-6 max-w-3xl">A scaffolded, interactive course aligned with the <b class="text-white">2026 Official ETS format</b>. Learn the new task types, master every question type, practice with feedback, and finish with a realistic mock exam.</p>
+
+    <div class="grid sm:grid-cols-4 gap-3 mb-6">
+      <div class="glass rounded-xl p-4">
+        <div class="text-2xl mb-1">⏱️</div>
+        <div class="font-semibold">~30 min</div>
+        <div class="text-xs text-[var(--muted)]">Up to 50 questions</div>
+      </div>
+      <div class="glass rounded-xl p-4">
+        <div class="text-2xl mb-1">🎚️</div>
+        <div class="font-semibold">Adaptive</div>
+        <div class="text-xs text-[var(--muted)]">2 modules</div>
+      </div>
+      <div class="glass rounded-xl p-4">
+        <div class="text-2xl mb-1">📝</div>
+        <div class="font-semibold">3 Task Types</div>
+        <div class="text-xs text-[var(--muted)]">Words · Daily · Academic</div>
+      </div>
+      <div class="glass rounded-xl p-4">
+        <div class="text-2xl mb-1">📊</div>
+        <div class="font-semibold">1–6 Band</div>
+        <div class="text-xs text-[var(--muted)]">CEFR aligned</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-2xl p-6 sm:p-8">
+    <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span class="text-[var(--accent)]">📋</span> Your Learning Path</h2>
+    <ol class="space-y-3 mb-6">
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">01</span><div><b>The 2026 Format</b> — Structure, scoring, adaptive modules.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">02</span><div><b>3 Task Types Deep Dive</b> — Complete the Words, Daily Life, Academic Passages.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">03</span><div><b>9 Question Types + Practice</b> — Identify, strategize, and drill every type.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">04</span><div><b>Reading Strategies</b> — Skim, scan, and attack with proven methods.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">05</span><div><b>Guided Practice</b> — Mixed exercises with scaffolded feedback.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">06</span><div><b>Test-Day Playbook</b> — Timing, adaptive strategy, final insights.</div></li>
+      <li class="flex gap-3 items-start"><span class="mono text-[var(--accent)]">07</span><div><b>Final Mock Exam</b> — Full simulated exam with 2 modules and timer.</div></li>
+    </ol>
+
+    <button data-nav="1" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-6 py-3 rounded-lg">Start Lesson 1 →</button>
+  </div>
+</div>`;
+
+/* =========================================================
+   FORMAT
+========================================================= */
+const FORMAT_HTML = `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">The 2026 Reading Format</h1>
+    <p class="text-[var(--muted)]">Everything you need to know before you read a single word.</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="glass rounded-xl p-5">
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">Structure</div>
+      <ul class="space-y-2 text-sm">
+        <li class="flex justify-between border-b border-[var(--line)] pb-2"><span>Total questions</span><span class="mono font-semibold">~50</span></li>
+        <li class="flex justify-between border-b border-[var(--line)] pb-2"><span>Total time</span><span class="mono font-semibold">~30 min</span></li>
+        <li class="flex justify-between border-b border-[var(--line)] pb-2"><span>Module 1</span><span class="mono font-semibold">~35 questions · 20 min</span></li>
+        <li class="flex justify-between border-b border-[var(--line)] pb-2"><span>Module 2</span><span class="mono font-semibold">~15 questions · 9 min</span></li>
+        <li class="flex justify-between"><span>Scoring</span><span class="mono font-semibold">1–6 band</span></li>
+      </ul>
+    </div>
+
+    <div class="glass rounded-xl p-5">
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">Two-Module Adaptive</div>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-start gap-3">
+          <div class="step-badge">1</div>
+          <div><b>Module 1 is "routing".</b> Mixed difficulty. Your performance here determines Module 2.</div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="step-badge" style="background:var(--accent-2)">2</div>
+          <div><b>High Module 1 score → harder Module 2.</b> This is <i>good</i>. Harder modules have a higher ceiling (up to Band 6).</div>
+        </div>
+        <div class="flex items-start gap-3">
+          <div class="step-badge" style="background:var(--warn)">3</div>
+          <div><b>Low Module 1 score → easier Module 2.</b> Caps your band at ~3.5–4.0.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-3">The 3 Task Types</div>
+    <p class="text-sm text-[var(--muted)] mb-3">The Reading section includes three distinct task types, each measuring different skills:</p>
+    <div class="grid md:grid-cols-3 gap-3">
+      <div class="strategy-card">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="step-badge">1</div>
+          <b class="text-[var(--accent)]">Complete the Words</b>
+        </div>
+        <div class="text-xs text-[var(--muted)]">Short academic paragraphs (~70–100 words) with <b>partially deleted words</b>. You fill in the missing letters.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="step-badge">2</div>
+          <b class="text-[var(--accent)]">Read in Daily Life</b>
+        </div>
+        <div class="text-xs text-[var(--muted)]">Short practical texts (15–150 words): <b>emails, notices, social media posts</b>. 2–3 questions per text.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="step-badge">3</div>
+          <b class="text-[var(--accent)]">Read an Academic Passage</b>
+        </div>
+        <div class="text-xs text-[var(--muted)]">Short expository passages (~200 words) on academic topics. <b>5 questions per passage</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-3">Band Scale (1–6) · CEFR Aligned</div>
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2 text-sm">
+      <div class="demo-box text-center"><div class="mono font-bold text-[var(--err)]">1.0–1.5</div><div class="text-xs text-[var(--muted)]">A1 · Below Basic</div></div>
+      <div class="demo-box text-center"><div class="mono font-bold text-[var(--warn)]">2.0–2.5</div><div class="text-xs text-[var(--muted)]">A2 · Basic</div></div>
+      <div class="demo-box text-center"><div class="mono font-bold text-yellow-400">3.0–3.5</div><div class="text-xs text-[var(--muted)]">B1 · Intermediate</div></div>
+      <div class="demo-box text-center"><div class="mono font-bold text-[var(--accent-2)]">4.0–4.5</div><div class="text-xs text-[var(--muted)]">B2 · Upper-Int.</div></div>
+      <div class="demo-box text-center"><div class="mono font-bold text-[var(--accent)]">5.0–5.5</div><div class="text-xs text-[var(--muted)]">C1 · Advanced</div></div>
+      <div class="demo-box text-center"><div class="mono font-bold text-[var(--ok)]">6.0</div><div class="text-xs text-[var(--muted)]">C2 · Proficient</div></div>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="0" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="2" data-complete="format" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Mark Complete & Continue →</button>
+  </div>
+</div>`;
+
+/* =========================================================
+   3 TASK TYPES DEEP DIVE
+========================================================= */
+let currentTask = 0;
+
+const TASKS_DATA = [
+  {
+    id:'complete',
+    name:'Complete the Words',
+    format:'Short academic paragraph (~70–100 words) with 10 partially deleted words. The first sentence is always complete to establish context.',
+    goal:'Process academic texts for both meaning and form at the word level.',
+    strategy:[
+      'Use the first sentence (complete) as your foundation — it establishes topic, tone, and context.',
+      'Look for <b>context clues</b> in surrounding words and phrases.',
+      'Apply <b>grammatical knowledge</b>: what part of speech is needed? What endings (plurals, tenses)?',
+      'Think about <b>common word patterns</b>: prefixes, suffixes, roots. Use the given letters as clues.',
+      'Read the completed paragraph silently to check it flows naturally.'
+    ],
+    example:{
+      text:'Glaciers are large expanses of ice that move slowly over land. As th<span class="word-slot">ey</span> advance, these ma<span class="word-slot">sses</span> play a cr<span class="word-slot">itical</span> role in sh<span class="word-slot">aping</span> the Ea<span class="word-slot">rth\'s</span> sur<span class="word-slot">face</span>.',
+      answers:['ey','sses','itical','aping','rth\'s','face'],
+      explanation:'Each missing word is determined by both meaning and grammar. "They" matches the plural subject. "Masses" continues the description of glaciers. "Critical" fits the adjective slot before "role". "Shaping" is the gerund needed after "in".'
+    },
+    distractors:[
+      '<b>Spelling traps:</b> Words that sound right but are spelled wrong (e.g., "recieve" vs. "receive").',
+      '<b>Grammar traps:</b> Wrong part of speech (e.g., noun where verb is needed).',
+      '<b>Context traps:</b> Words that fit grammatically but change the meaning.'
+    ],
+    practice:{
+      q:'Fill in the missing letters:',
+      text:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">___</span> a br<span class="word-slot">___</span> range of behav<span class="word-slot">___</span>, fr<span class="word-slot">___</span> foraging to complex soc<span class="word-slot">___</span> organization. For inst<span class="word-slot">___</span>, bees perform intr<span class="word-slot">___</span> dances to communicate the location of food sources.',
+      answers:['hibit','oad','iors','om','ial','ance','icate'],
+      feedback:'Correct answers: exhibit, broad, behaviors, from, social, instance, intricate. The given letters at the start of each word provide clues. Use context (insects displaying behaviors) and grammar (adjectives before nouns, prepositions linking phrases) to complete each word.'
+    }
+  },
+  {
+    id:'daily',
+    name:'Read in Daily Life',
+    format:'Short practical texts (15–150 words): emails, notices, social media posts, schedules, forms. 2–3 multiple-choice questions per text.',
+    goal:'Interpret practical, everyday texts that students may encounter while navigating campus life.',
+    strategy:[
+      '<b>Note the text type</b>: Is it an email, advertisement, notice, or social media post? Each has typical features.',
+      '<b>Understand the main purpose</b>: Why was this written? To inform, invite, remind, or request?',
+      '<b>Scan for key practical information</b>: Dates, times, locations, deadlines, requirements.',
+      '<b>Match ideas rather than exact words</b>: Correct answers often paraphrase the text.',
+      '<b>For reference questions</b>: Look for the "Sender" or "Origin" in introductory lines.'
+    ],
+    example:{
+      text:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. <b>To secure your spot, respond to this email to confirm your registration.</b><br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive. Hair nets will be provided and must be worn at all times. We have aprons for you to borrow, or you can bring your own.<br/><br/>Best regards,<br/>Michael Brown</div>',
+      answers:[],
+      explanation:'This email has a clear purpose (confirm registration), specific requirements (respond to email, $10 fee on arrival), and practical details (hair nets provided, aprons optional). Questions often test inference ("What must Maria do to secure her spot?") and factual details ("What must Maria bring?").'
+    },
+    distractors:[
+      '<b>Over-extrapolation:</b> Choices that go beyond what the text states.',
+      '<b>Wrong detail:</b> Choices that mention real details but misattribute them.',
+      '<b>Assumption traps:</b> Choices that require outside knowledge not in the text.'
+    ],
+    practice:{
+      q:'What can be inferred about Maria Lopez\'s spot in the class?',
+      text:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive.<br/><br/>Best regards,<br/>Michael Brown</div>',
+      choices:[
+        'She is currently on the waiting list.',
+        'She will lose her spot if she does not respond to this email.',
+        'She will secure her spot after she pays a fee.',
+        'She has indicated to Michael Brown that she cannot attend.'
+      ],
+      correct:1,
+      feedback:'Correct: B. The email states "To secure your spot, respond to this email to confirm your registration." This implies she will lose her spot if she does not respond. Choice A is wrong because the email says there IS a waiting list, not that Maria is on it.'
+    }
+  },
+  {
+    id:'academic',
+    name:'Read an Academic Passage',
+    format:'Short expository passage (~200 words) on academic topics (history, science, arts, business). 5 multiple-choice questions per passage.',
+    goal:'Understand academic texts that do not require specialized knowledge.',
+    strategy:[
+      '<b>Identify the main topic and organizational structure</b>: Read the first few sentences carefully. How is the information organized?',
+      '<b>Look for topic sentences and supporting details</b>: Topic sentences often appear at the beginning of paragraphs.',
+      '<b>Pay attention to transitions</b>: Words like "however," "for example," "in contrast" signal relationships between ideas.',
+      '<b>Use context to understand unfamiliar vocabulary</b>: Look at surrounding sentences.',
+      '<b>Distinguish between main ideas and minor details</b>: This is crucial for Main Idea questions.'
+    ],
+    example:{
+      text:'<div class="example-box"><b>Ancient Aqueducts</b><br/><br/>Aqueducts are among the most impressive engineering feats of ancient civilizations. Aqueducts are structures built to transport water from a distant source to cities and towns. The Romans, in particular, perfected the construction of aqueducts, using gravity to carry water over long distances.<br/><br/>Roman aqueducts were made of stone, brick, and concrete and included tunnels, bridges, and pipes. The aqueducts were essential to the growth and sustainability of Roman cities. They supplied water for public baths, fountains, households, and agriculture. One famous example is the Pont du Gard in France. Built in the first century A.D., it spans 50 kilometers and features a three-tiered bridge that remains standing today.</div>',
+      answers:[],
+      explanation:'This passage follows a clear structure: introduction (what aqueducts are), development (Roman construction), and example (Pont du Gard). Questions test factual details ("What materials were used?"), vocabulary ("What does \'feats\' mean?"), rhetorical purpose ("Why mention public baths?"), and inference ("What can we conclude about Roman engineering?").'
+    },
+    distractors:[
+      '<b>Same-word trap:</b> Choices that use exact vocabulary from the text but misattribute relationships.',
+      '<b>Too broad/too narrow:</b> Choices that over-generalize or focus on minor details.',
+      '<b>Not mentioned:</b> Choices that are true in real life but not in the text.',
+      '<b>Meaning flip:</b> Choices that reverse cause/effect or other relationships.'
+    ],
+    practice:{
+      q:'Why does the author mention public baths, fountains, households, and agriculture?',
+      text:'<div class="example-box">The aqueducts were essential to the growth and sustainability of Roman cities. They supplied water for public baths, fountains, households, and agriculture.</div>',
+      choices:[
+        'To imply that the construction of Roman aqueducts required a lot of effort',
+        'To indicate that Roman cities needed more water than aqueducts could provide',
+        'To emphasize the rapid growth and impressive sustainability of Roman cities',
+        'To explain the usefulness of Roman aqueducts'
+      ],
+      correct:3,
+      feedback:'Correct: D. The list of uses (baths, fountains, households, agriculture) serves to explain WHAT the aqueducts were used for — their usefulness. The previous sentence establishes they were "essential," and this sentence elaborates on why.'
+    }
+  }
+];
+
+function renderTasksLesson(){
+  const t = TASKS_DATA[currentTask];
+  return `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">The 3 Task Types — Deep Dive</h1>
+    <p class="text-[var(--muted)]">Each task type requires a different approach. Master all three.</p>
+  </div>
+
+  <div id="taskTabs" class="flex flex-wrap gap-2 glass rounded-xl p-2">
+    ${TASKS_DATA.map((task,i)=>`<button data-task-tab="${i}" class="tab-btn ${i===currentTask?'active':''}">${task.name}</button>`).join('')}
+  </div>
+
+  <div class="glass rounded-xl p-5 sm:p-6 space-y-5">
+    <!-- Format -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">📋 Format</div>
+      <p class="text-sm">${t.format}</p>
+      <p class="text-sm text-[var(--muted)] mt-2"><b>Goal:</b> ${t.goal}</p>
+    </div>
+
+    <!-- Strategy -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">🎯 Step-by-Step Strategy</div>
+      <div class="space-y-2">
+        ${t.strategy.map((s,i)=>`
+          <div class="strategy-card flex items-start gap-2">
+            <div class="step-badge">${i+1}</div>
+            <div class="text-sm flex-1">${s}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Example -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">💡 Worked Example</div>
+      <div class="text-sm">${t.example.text}</div>
+      ${t.example.explanation ? `<div class="mt-2 text-xs text-[var(--muted)] italic">${t.example.explanation}</div>` : ''}
+    </div>
+
+    <!-- Distractors -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--err)] mb-2">⚠️ Common Distractors</div>
+      <div class="space-y-2">
+        ${t.distractors.map(d=>`<div class="trap-card text-sm">${d}</div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Practice -->
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent-2)] mb-2">✍️ Try It Now</div>
+      <div class="glass rounded-xl p-4">
+        <div class="font-semibold mb-3 text-sm">${t.practice.q}</div>
+        ${t.practice.text ? `<div class="mb-3">${t.practice.text}</div>` : ''}
+        ${t.practice.choices ? `
+          <div class="space-y-2" id="taskPractice-${currentTask}">
+            ${t.practice.choices.map((c,ci)=>`
+              <div class="choice border border-[var(--line)] rounded-lg p-3 text-sm" data-task-pick="${currentTask}-${ci}">
+                ${String.fromCharCode(65+ci)}. ${c}
+              </div>
+            `).join('')}
+          </div>
+          <div id="taskFeedback-${currentTask}" class="mt-3"></div>
+        ` : `
+          <input type="text" data-task-input="${currentTask}" placeholder="Type your answers separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none"/>
+          <button data-task-submit="${currentTask}" class="btn mt-2 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answers</button>
+          <div id="taskFeedback-${currentTask}" class="mt-3"></div>
+        `}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="1" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="3" data-complete="tasks" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Mark Complete & Continue →</button>
+  </div>
+</div>`;
+}
+
+/* =========================================================
+   9 QUESTION TYPES + PRACTICE
+========================================================= */
+let currentQType = 0;
+
+const QTYPES = [
+  {
+    id:'factual', name:'Factual Information', color:'accent',
+    desc:'Identify explicit data points or the main idea of the passage.',
+    signal:'"According to paragraph X..." · "What is the main topic?" · "What does the author state about...?"',
+    strategy:'Prioritize <b>high-level academic synonyms</b> over lexical matches. For Main Idea variants, use the <b>Last Paragraph Shortcut</b>: extract the concluding summary to identify opposing forces.',
+    distractor:'<b>Same-Word Trap:</b> Distractors use exact vocabulary from the source but misattribute the relationship or directionality (e.g., swapping cause and effect).',
+    practice:{
+      q:'According to the passage, what is one reason marine animals do not need the same supportive structures as land animals?',
+      passage:'<div class="example-box">Water is dense, about 840 times as dense as air—roughly as dense as most life forms, as they are primarily made of water. This means that marine organisms fight no battle with gravity and possess none of the structures that we need on land to combat it.</div>',
+      choices:[
+        'Marine animals are much smaller than land animals.',
+        'Water reduces the effects of gravity on marine animals\' bodies.',
+        'The thicker skin of marine animals provides sufficient support.',
+        'Animals that live in the water have more bones.'
+      ],
+      correct:1,
+      feedback:'Correct: B. The passage explains that water is much denser than air and that marine organisms are primarily made of water. Because of this, they do not struggle against gravity the way land animals do.'
+    }
+  },
+  {
+    id:'neg', name:'Negative Factual', color:'warn',
+    desc:'Isolate the outlier information NOT supported by the text. Contains caps-lock indicators NOT or EXCEPT.',
+    signal:'"All of the following are mentioned EXCEPT..." · "What is NOT true of..."',
+    strategy:'Execute a <b>Trifecta Elimination</b>: verify three options as explicitly confirmed before selecting the remaining outlier. Rare (max 1-2 per test) due to high processing time.',
+    distractor:'<b>True but Irrelevant:</b> Three distractors are accurate representations of the text, requiring you to maintain state for all four options simultaneously.',
+    practice:{
+      q:'What does NOT occur inside PV cells?',
+      passage:'<div class="example-box">When sunlight hits the PV cell, it is absorbed by a semiconductor material, usually silicon. The energy from the light knocks electrons loose from atoms, creating a flow of electric current. This current is then captured and can be used to power electrical devices. A common misconception is that, at night, PV cells store energy like a battery. In fact, they convert sunlight into electricity in real time; to store energy, a separate energy storage system, like a battery, is required.</div>',
+      choices:[
+        'Silicon or another material absorbs sunlight.',
+        'Electrons become less tightly bound to atoms.',
+        'A flow of electric current is captured.',
+        'Electricity is stored in a battery.'
+      ],
+      correct:3,
+      feedback:'Correct: D. The passage explicitly states that PV cells do NOT store electricity like a battery; instead, they convert sunlight into electricity in real time, and a separate storage system is needed. Choices A, B, and C are all explicitly stated as occurring inside PV cells.'
+    }
+  },
+  {
+    id:'ref', name:'Reference', color:'info',
+    desc:'Resolve pronoun or demonstrative phrase referents.',
+    signal:'"The word X refers to..." · "This phenomenon refers to..."',
+    strategy:'Apply the <b>Look-Back heuristic</b>: prioritize the immediately preceding 1-2 sentences. <b>Exception:</b> In Daily Life announcements, the referent "we" often requires identifying the "Sender" or "Origin" in introductory lines.',
+    distractor:'<b>Number Mismatch:</b> Distractors include plural nouns for singular pronouns or nearby proper nouns that lack the functional role of the referent.',
+    practice:{
+      q:'The word "they" in the passage refers to:',
+      passage:'<div class="example-box">When cities replace forests and fields with impervious surfaces, <b>they</b> lose these cooling mechanisms.</div>',
+      choices:[
+        'Forests and fields',
+        'Rural areas',
+        'Cities',
+        'Impervious surfaces'
+      ],
+      correct:2,
+      feedback:'Correct: C. The sentence subject is "cities" (implied by "When cities replace..."). The pronoun "they" refers back to the subject performing the action — cities.'
+    }
+  },
+  {
+    id:'vocab', name:'Vocabulary', color:'accent-2',
+    desc:'Determine context-specific semantic value of high-level academic lexicon.',
+    signal:'"...is closest in meaning to..."',
+    strategy:'Execute a <b>Semantic Substitution Test</b>: if the candidate word maintains the temporal or logical constraints of the sentence, it is correct.',
+    distractor:'<b>Generic Synonym:</b> Distractors provide meanings that are correct in other contexts but logically fail the substitution test.',
+    practice:{
+      q:'The word "viable" in the passage is closest in meaning to:',
+      passage:'<div class="example-box">Researchers are also developing moonlight solar panels, which can generate electricity at night, during rain, and under overcast skies. They make renewable energy a more <b>viable</b> option in diverse environments.</div>',
+      choices:[
+        'practical',
+        'predictable',
+        'valuable',
+        'adaptable'
+      ],
+      correct:0,
+      feedback:'Correct: A. "Viable" means capable of working successfully; feasible. "Practical" is the closest synonym. Test: "...a more practical option in diverse environments" preserves the meaning.'
+    }
+  },
+  {
+    id:'select', name:'Select the Sentence', color:'ok',
+    desc:'NEW 2026: Map a functional description to a specific sentence location. Interactive paragraph selection.',
+    signal:'"Click the sentence that explains Why/How..."',
+    strategy:'Use <b>Functional Mapping</b>: ignore direct keyword matching. Instead, map a functional description (e.g., "changes below the surface") to its conceptual anchor.',
+    distractor:'<b>Topical Neighbor:</b> Nearby sentences discussing the same subject but performing different rhetorical functions (e.g., stating a result instead of a cause).',
+    practice:{
+      q:'Click the sentence that explains HOW tall buildings contribute to the urban heat island effect:',
+      passage:'<div class="example-box space-y-2"><div>A. Asphalt, concrete, and brick have low albedo, meaning they reflect less sunlight and absorb more heat.</div><div><b>B. Additionally, the geometry of tall buildings creates urban canyons that trap heat and block wind flow, reducing natural cooling.</b></div><div>C. Vehicles, industrial facilities, and air conditioning systems release waste heat into the atmosphere.</div><div>D. Trees and plants provide shade and release water vapor through evapotranspiration.</div></div>',
+      choices:['A','B','C','D'],
+      correct:1,
+      feedback:'Correct: B. Sentence B is the only one that explains HOW tall buildings contribute — through their geometry creating urban canyons that trap heat. The other sentences describe different aspects of the heat island effect.'
+    }
+  },
+  {
+    id:'simplify', name:'Sentence Simplification', color:'err',
+    desc:'Identify the core logical paraphrase of a multi-clause sentence.',
+    signal:'"...best expresses the essential information...?"',
+    strategy:'Use <b>Own-Words Paraphrasing</b>: focus on the primary relationship between clauses (causative, conditional, or contrastive).',
+    distractor:'<b>The Meaning Flip:</b> Distractors often invert the intent of a single clause or flip the order of clauses to obscure the primary relationship.',
+    practice:{
+      q:'Which best expresses the essential information: "However, constructing and maintaining aqueducts required significant resources and labor. Despite these challenges, aqueducts were essential investments in ancient infrastructure and played a crucial role in development."?',
+      choices:[
+        'Aqueducts were expensive to build and maintain, but they were essential for ancient development.',
+        'Ancient civilizations avoided building aqueducts because they were too costly.',
+        'Aqueducts were only built in wealthy civilizations that could afford them.',
+        'The labor required to build aqueducts was provided by enslaved people.'
+      ],
+      correct:0,
+      feedback:'Correct: A. The core meaning: (1) aqueducts required significant resources/labor (expensive), (2) despite this, they were essential investments. Choice A captures both clauses. B inverts the meaning. C and D add information not in the original.'
+    }
+  },
+  {
+    id:'infer', name:'Inference', color:'ok',
+    desc:'Identify unstated but logically necessary conclusions.',
+    signal:'"infer" · "imply" · "suggest" · "likely"',
+    strategy:'Identify the only conclusion supported by factual evidence. The answer must be <b>strongly supported</b> but not directly stated.',
+    distractor:'<b>The Direct Statement Trap:</b> Distractors that repeat the text verbatim are incorrect because an inference must be unstated.',
+    practice:{
+      q:'What can be inferred about Emma\'s semester in Japan?',
+      passage:'<div class="example-box">I can\'t believe I\'m already halfway through my exchange semester in Japan. Time really flies when you have a busy class schedule! Last weekend, <b>after wrapping up midterms</b>, I finally headed out of Osaka. My destination? Kyoto.</div>',
+      choices:[
+        'She is studying in Kyoto as an exchange student.',
+        'She has visited many cities across Japan in the first half of the semester.',
+        'She was too busy with coursework to travel until last weekend.',
+        'She has not spent a lot of time preparing for her midterms.'
+      ],
+      correct:2,
+      feedback:'Correct: C. Emma says she traveled "after wrapping up midterms" and that she "finally headed out" — implying she was too busy with coursework to travel before. Choice A is wrong because she\'s studying in Osaka, not Kyoto.'
+    }
+  },
+  {
+    id:'purpose', name:'Rhetorical Purpose', color:'accent',
+    desc:'Determine the author\'s strategic intent or paragraph relationships.',
+    signal:'"Why does the author mention X?" · "What is the relationship between Paragraph A and B?"',
+    strategy:'Analyze how a specific example serves a broader claim. Look at the sentence <b>before</b> the example — it usually states the claim the example supports.',
+    distractor:'<b>The Bridge Too Far:</b> This distractor over-extrapolates frequency or significance from a single example.',
+    practice:{
+      q:'Why does the author mention Singapore in paragraph 5?',
+      passage:'<div class="example-box">Several mitigation strategies have emerged to combat this phenomenon. Cool roofs, painted with reflective materials, can reduce building temperatures by up to 30%. Urban forests and green roofs reintroduce vegetation into the concrete landscape. Some cities have implemented cool pavements. <b>Singapore\'s extensive greening program, which requires new buildings to replace any greenery lost on the ground, has become a model for tropical cities worldwide.</b></div>',
+      choices:[
+        'To criticize Singapore\'s urban planning',
+        'To provide an example of a successful urban greening program that serves as a model',
+        'To argue that tropical cities face no heat island problems',
+        'To show that Singapore has the largest population in Asia'
+      ],
+      correct:1,
+      feedback:'Correct: B. Singapore is introduced as "a model for tropical cities worldwide." The author uses it as a successful example of urban greening.'
+    }
+  },
+  {
+    id:'insert', name:'Insert Text', color:'info',
+    desc:'Reconstitute logical flow using linguistic anchors. Drag-and-drop squares.',
+    signal:'"Look at the 4 squares [■]. Where would the sentence best fit?"',
+    strategy:'Use <b>Topic & Transition</b> logic: identify "Linguistic Hooks" like "these mixtures" or "as a result." Find the sentence immediately preceding the square that introduces the specific nouns or causes mentioned in the hook.',
+    distractor:'<b>Topical Proximity:</b> Placing the sentence in a location that shares keywords but breaks the logical chain.',
+    practice:{
+      q:'Where would this sentence best fit? "This meant that the source of the water had to be higher than the city to which it was brought."',
+      passage:'<div class="example-box">The Romans, in particular, perfected the construction of aqueducts, <b>using gravity to carry water over long distances</b>. [A] Roman aqueducts were made of stone, brick, and concrete and included tunnels, bridges, and pipes. [B] The aqueducts were essential to the growth and sustainability of Roman cities. [C] They supplied water for public baths, fountains, households, and agriculture. [D]</div>',
+      choices:['Location A','Location B','Location C','Location D'],
+      correct:0,
+      feedback:'Correct: A. The inserted sentence begins with "This meant that..." — "This" refers to "using gravity to carry water." If aqueducts use gravity, then the water source must be higher than the destination. Location A is correct because it follows the sentence about gravity.'
+    }
+  }
+];
+
+function renderQuestionsLesson(){
+  const q = QTYPES[currentQType];
+  return `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">9 Question Types + Practice</h1>
+    <p class="text-[var(--muted)]">Every Reading question falls into one of these nine categories. Learn to recognize each instantly — and practice as you learn.</p>
+  </div>
+
+  <div class="glass rounded-xl p-4">
+    <div class="text-xs uppercase tracking-wider text-[var(--muted)] mb-2">Question Type Frequency</div>
+    <div class="grid sm:grid-cols-3 gap-2 text-xs">
+      <div class="strategy-card"><b class="text-[var(--ok)]">● Guaranteed:</b> Factual, Insert Text, Inference, Rhetorical Purpose</div>
+      <div class="strategy-card"><b class="text-[var(--accent)]">● Frequent:</b> Vocabulary, Select the Sentence</div>
+      <div class="strategy-card"><b class="text-[var(--muted)]">● Rare:</b> Reference (max 2), Negative Factual (max 1), Sentence Simplification</div>
+    </div>
+  </div>
+
+  <div id="qtypeTabs" class="flex flex-wrap gap-2 glass rounded-xl p-2">
+    ${QTYPES.map((qt,i)=>`<button data-qtype-tab="${i}" class="tab-btn ${i===currentQType?'active':''}">${qt.name}</button>`).join('')}
+  </div>
+
+  <div class="glass rounded-xl p-5 sm:p-6 space-y-5">
+    <div>
+      <div class="flex items-center gap-3 mb-3">
+        <div class="pill bg-[var(--${q.color})]/15 text-[var(--${q.color})] border border-[var(--${q.color})]/30">Type ${currentQType+1}/9</div>
+        <h3 class="text-xl font-bold">${q.name}</h3>
+      </div>
+      <p class="text-[var(--muted)] text-sm mb-3">${q.desc}</p>
+    </div>
+
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">🔍 Signal Phrases</div>
+      <div class="strategy-card text-sm mono">${q.signal}</div>
+    </div>
+
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">💡 Strategy</div>
+      <div class="strategy-card text-sm">${q.strategy}</div>
+    </div>
+
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--err)] mb-2">⚠️ Distractor Mechanics</div>
+      <div class="trap-card text-sm">${q.distractor}</div>
+    </div>
+
+    <div>
+      <div class="text-xs uppercase tracking-wider text-[var(--accent-2)] mb-2">✍️ Practice This Type</div>
+      <div class="glass rounded-xl p-4">
+        <div class="font-semibold mb-3 text-sm">${q.practice.q}</div>
+        ${q.practice.passage ? `<div class="mb-3 text-sm">${q.practice.passage}</div>` : ''}
+        <div class="space-y-2" id="qtypePractice-${currentQType}">
+          ${q.practice.choices.map((c,ci)=>`
+            <div class="choice border border-[var(--line)] rounded-lg p-3 text-sm" data-qtype-pick="${currentQType}-${ci}">
+              ${String.fromCharCode(65+ci)}. ${c}
+            </div>
+          `).join('')}
+        </div>
+        <div id="qtypeFeedback-${currentQType}" class="mt-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="2" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="4" data-complete="questions" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Mark Complete & Continue →</button>
+  </div>
+</div>`;
+}
+
+/* =========================================================
+   STRATEGIES (improved, no dashed lines)
+========================================================= */
+const STRATEGIES_HTML = `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">Proven Reading Strategies</h1>
+    <p class="text-[var(--muted)]">How to read smart, not hard. These are the techniques that separate Band 6 students from the rest.</p>
+  </div>
+
+  <!-- STRATEGY 1: FOCUS MAP -->
+  <div class="glass rounded-xl p-5">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="step-badge">1</div>
+      <h2 class="text-xl font-bold">The 60-Second Focus Map</h2>
+    </div>
+    <p class="text-[var(--muted)] text-sm mb-3">Before reading questions, spend 60 seconds building a mental map of the passage. Use this color-coded system:</p>
+
+    <div class="focus-map mb-3">
+      <p><span class="hl-red">The extinction of the golden toad, a brightly colored amphibian once found in the cloud forests of Costa Rica, serves as a poignant example of the fragility of tropical ecosystems.</span></p>
+      <p>Scientists believe its decline is due to habitat destruction, changing weather patterns, and disease caused by a type of fungus that attacks the skin of amphibians.</p>
+      <p><span class="hl-blue">Conservationists study the golden toad's demise to understand how climate factors affect amphibian populations.</span> <span class="hl-yellow">This case underscores</span> the importance of preserving sensitive habitats and addressing global environmental challenges to protect biodiversity. <span class="hl-green">Understanding these factors is crucial for developing effective conservation strategies.</span></p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-2 text-sm mb-3">
+      <div class="strategy-card"><span class="legend-dot" style="background:var(--err)"></span><b>Red</b> = First sentence (main idea — read carefully)</div>
+      <div class="strategy-card"><span class="legend-dot" style="background:var(--info)"></span><b>Blue</b> = Topic sentences (key claims)</div>
+      <div class="strategy-card"><span class="legend-dot" style="background:var(--warn)"></span><b>Yellow</b> = Transition words (however, therefore, this case)</div>
+      <div class="strategy-card"><span class="legend-dot" style="background:var(--ok)"></span><b>Green</b> = Concluding summary (wrap-up)</div>
+    </div>
+
+    <div class="text-xs text-[var(--muted)] italic">Your eyes should land on red, blue, and yellow highlights first. Skip the middle sentences unless a question sends you back.</div>
+  </div>
+
+  <!-- STRATEGY 2: KEYWORD HUNT -->
+  <div class="glass rounded-xl p-5">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="step-badge">2</div>
+      <h2 class="text-xl font-bold">Keyword-First Question Attack</h2>
+    </div>
+    <p class="text-[var(--muted)] text-sm mb-3">Never read the passage first for detail questions. Read the question, find the <b class="text-white">keyword</b>, then hunt in the passage.</p>
+
+    <div class="example-box">
+      <div class="text-xs text-[var(--muted)] mb-1">STEP 1 — Read the question:</div>
+      <div class="bg-[var(--panel-2)] rounded p-2 text-sm mb-3">"According to paragraph 3, what did Maguire's study find?"</div>
+      <div class="text-xs text-[var(--muted)] mb-1">STEP 2 — Extract keywords:</div>
+      <div class="mb-3"><span class="kbd">paragraph 3</span> <span class="kbd">Maguire</span> <span class="kbd">study</span> <span class="kbd">find</span></div>
+      <div class="text-xs text-[var(--muted)] mb-1">STEP 3 — Jump to paragraph 3 and scan:</div>
+      <div class="bg-[var(--panel-2)] rounded p-2 text-sm">
+        London taxi drivers provide another striking example. A landmark study by <span class="hl-yellow">Eleanor Maguire</span> and her colleagues at University College London <span class="hl-yellow">found</span> that the posterior hippocampus was <span class="hl-green">significantly larger in experienced taxi drivers</span> than in control subjects.
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGY 3: POE -->
+  <div class="glass rounded-xl p-5">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="step-badge">3</div>
+      <h2 class="text-xl font-bold">The Process of Elimination (POE)</h2>
+    </div>
+    <p class="text-[var(--muted)] text-sm mb-3">TOEFL answer choices are carefully designed to include <b class="text-white">3 traps</b> for every 1 correct answer. Learn the 4 classic traps:</p>
+
+    <div class="grid sm:grid-cols-2 gap-2 text-sm mb-3">
+      <div class="trap-card"><b>🎯 Trap 1: Opposite</b><br/><span class="text-xs text-[var(--muted)]">Says the reverse of the passage.</span></div>
+      <div class="trap-card"><b>🎯 Trap 2: Not Mentioned</b><br/><span class="text-xs text-[var(--muted)]">True in real life, but not in the text.</span></div>
+      <div class="trap-card"><b>🎯 Trap 3: Wrong Scope</b><br/><span class="text-xs text-[var(--muted)]">Too broad or too narrow.</span></div>
+      <div class="trap-card"><b>🎯 Trap 4: Same-Word Trap</b><br/><span class="text-xs text-[var(--muted)]">Uses exact words but misattributes relationship.</span></div>
+    </div>
+
+    <div class="example-box">
+        <div class="text-xs text-[var(--muted)] mb-2">Real Paragraph:</div>
+        <div class="bg-[var(--bg)] rounded p-3 text-sm mb-3 border-l-2 border-[var(--accent)]">
+          "However, constructing and maintaining aqueducts required significant resources and labor. Despite these challenges, aqueducts were essential investments in ancient infrastructure and played a crucial role in development."
+        </div>
+        <div class="text-xs text-[var(--muted)] mb-2">Question: "What problem with ancient aqueducts is mentioned?"</div>
+        <div class="space-y-2 text-sm">
+        <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+          <span style="text-decoration:line-through;color:var(--muted);opacity:.5">A. Environmental damage from groundwater use</span>
+          <span class="text-xs text-[var(--err)] ml-2">✗ Not mentioned</span>
+        </div>
+        <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+          <span style="text-decoration:line-through;color:var(--muted);opacity:.5">B. Limited amount of water provided</span>
+          <span class="text-xs text-[var(--err)] ml-2">✗ Opposite (passage says they were essential)</span>
+        </div>
+        <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+          <span style="text-decoration:line-through;color:var(--muted);opacity:.5">C. Frequent lack of durability</span>
+          <span class="text-xs text-[var(--err)] ml-2">✗ Opposite (Persian qanats were "exceptionally durable")</span>
+        </div>
+        <div class="choice border border-[var(--ok)] bg-[var(--ok)]/10 rounded p-2">
+          <span class="hl-green">D. The cost and effort of building and maintaining them</span>
+          <span class="text-xs text-[var(--ok)] ml-2">✓ Correct — matches "required significant resources and labor"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGY 4: VOCAB SUBSTITUTION -->
+  <div class="glass rounded-xl p-5">
+    <div class="flex items-center gap-3 mb-3">
+      <div class="step-badge">4</div>
+      <h2 class="text-xl font-bold">Vocabulary in Context: Substitution Test</h2>
+    </div>
+    <p class="text-[var(--muted)] text-sm mb-3">For vocabulary questions, <b class="text-white">forget the word's common meaning</b>. Plug each answer choice into the sentence. The one that keeps the original meaning wins.</p>
+
+    <div class="example-box">
+  <div class="text-xs text-[var(--accent)] mb-2">📖 The Process:</div>
+  <div class="bg-[var(--bg)] rounded p-3 text-sm mb-3">
+    <b>Step 1:</b> Read the sentence and understand the context. What's happening?<br/>
+    <b>Step 2:</b> Look at the highlighted word. What role does it play?<br/>
+    <b>Step 3:</b> Test each answer choice by substituting it into the sentence.<br/>
+    <b>Step 4:</b> Choose the one that preserves the original meaning.
+  </div>
+  
+  <div class="text-xs text-[var(--muted)] mb-2">Original Sentence:</div>
+  <div class="bg-[var(--bg)] rounded p-2 text-sm mb-3 border-l-2 border-[var(--accent)]">
+    "Human activities further <b class="text-[var(--accent)]">exacerbate</b> the phenomenon."
+  </div>
+  
+  <div class="text-xs text-[var(--muted)] mb-2">Context Analysis:</div>
+  <div class="text-sm mb-3 text-[var(--muted)]">
+    The phenomenon (urban heat islands) already exists. Human activities are making it <i>worse</i>. So "exacerbate" must mean "to make worse" or "to intensify."
+  </div>
+  
+  <div class="text-xs text-[var(--muted)] mb-2">Test Each Choice:</div>
+    <div class="space-y-2 text-sm">
+      <div class="choice border border-[var(--ok)] bg-[var(--ok)]/10 rounded p-2">
+        <b>A. worsen</b> → "...further <b>worsen</b> the phenomenon..." <span class="text-xs text-[var(--ok)] ml-2">✓ Perfect fit - preserves meaning</span>
+      </div>
+      <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+        <b>B. eliminate</b> → "...further <b>eliminate</b> the phenomenon..." <span class="text-xs text-[var(--err)] ml-2">✗ Opposite meaning - would solve the problem</span>
+      </div>
+      <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+        <b>C. ignore</b> → "...further <b>ignore</b> the phenomenon..." <span class="text-xs text-[var(--err)] ml-2">✗ Different concept - doesn't change intensity</span>
+      </div>
+      <div class="choice border border-[var(--err)]/50 bg-[var(--err)]/5 rounded p-2">
+        <b>D. measure</b> → "...further <b>measure</b> the phenomenon..." <span class="text-xs text-[var(--err)] ml-2">✗ Wrong action - measuring doesn't intensify</span>
+      </div>
+    </div>
+</div>
+  </div>
+
+  <!-- Practice exercises after strategies -->
+  <div class="glass rounded-xl p-5">
+  <div class="text-xs uppercase tracking-wider text-[var(--accent-2)] mb-3">✍️ Quick Strategy Check</div>
+  <div class="space-y-4">
+    <div class="glass rounded-lg p-4">
+      <div class="font-semibold mb-2 text-sm">Strategy Practice 1: Focus Map</div>
+      <div class="text-xs text-[var(--muted)] mb-2">Read this passage. Which sentence should you read FIRST to get the main idea?</div>
+      <div class="focus-map text-sm mb-3">
+        <p><span class="hl-red">Industrialization marked a significant turning point in modern history, leading to profound social and economic changes.</span> As factories emerged, cities expanded rapidly, drawing people from rural areas. This urban migration brought new challenges, including overcrowded living conditions and environmental pollution.</p>
+      </div>
+      <details class="bg-[var(--bg)] rounded p-3">
+        <summary class="text-xs text-[var(--accent)] cursor-pointer hover:text-[var(--ink)]">Click to reveal the answer</summary>
+        <div class="mt-2 text-sm text-[var(--muted)]">
+          <b class="text-[var(--ok)]">✓ Answer:</b> The first sentence (highlighted in red). It contains the main idea: industrialization caused major social and economic changes. The other sentences provide supporting details about <i>how</i> this happened.
+        </div>
+      </details>
+    </div>
+
+    <div class="glass rounded-lg p-4">
+      <div class="font-semibold mb-2 text-sm">Strategy Practice 2: POE</div>
+      <div class="text-xs text-[var(--muted)] mb-2">Read the passage and question. Which trap does the distractor represent?</div>
+      <div class="bg-[var(--bg)] rounded p-3 text-sm mb-3">
+        <b>Passage:</b> "The library is open Monday through Friday, 9 AM to 5 PM."<br/>
+        <b>Question:</b> "When is the library open?"<br/>
+        <b>Distractor:</b> "The library is open on weekends."
+      </div>
+      <details class="bg-[var(--bg)] rounded p-3">
+        <summary class="text-xs text-[var(--accent)] cursor-pointer hover:text-[var(--ink)]">Click to reveal the answer</summary>
+        <div class="mt-2 text-sm text-[var(--muted)]">
+          <b class="text-[var(--ok)]">✓ Answer:</b> Trap 1 (Opposite). The passage says "Monday through Friday" but the distractor says "weekends" - the exact opposite. This is a classic trap that contradicts the text directly.
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="3" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="5" data-complete="strategies" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Mark Complete & Continue →</button>
+  </div>
+</div>`;
+
+/* =========================================================
+   GUIDED PRACTICE (expanded)
+========================================================= */
+const PRACTICE_QUESTIONS = [
+  {
+    type:'complete',
+    taskLabel:'Complete the Words',
+    q:'Fill in the missing letters:',
+    passage:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">__</span>it a br<span class="word-slot">__</span>ad range of behav<span class="word-slot">__</span>ors, fr<span class="word-slot">__</span>m foraging to complex soc<span class="word-slot">__</span>al organization. For inst<span class="word-slot">__</span>nce, bees perform intr<span class="word-slot">__</span>cate dances to communicate the location of food sources.',
+    correct:'exhibit, broad, behaviors, from, social, instance, intricate',
+    explanation:'Each missing word is determined by both meaning and grammar. "Exhibit" means to display. "Broad" describes the wide variety. "Behaviors" is the plural noun. "From" introduces the starting point. "Social" describes organization among insects. "Instance" completes "for instance". "Intricate" describes the complex nature of the dances.'
+  },
+  {
+    type:'daily',
+    taskLabel:'Daily Life · Inference',
+    q:'What can be inferred about Maria Lopez\'s spot in the class?',
+    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive.<br/><br/>Best regards,<br/>Michael Brown</div>',
+    choices:[
+      'She is currently on the waiting list.',
+      'She will lose her spot if she does not respond to this email.',
+      'She will secure her spot after she pays a fee.',
+      'She has indicated to Michael Brown that she cannot attend.'
+    ],
+    correct:1,
+    explanation:'Correct: B. The email states "To secure your spot, respond to this email to confirm your registration." This implies she will lose her spot if she does not respond. Choice A is wrong because the email says there IS a waiting list, not that Maria is on it.'
+  },
+  {
+    type:'daily',
+    taskLabel:'Daily Life · Factual',
+    q:'What must Maria Lopez take to the class?',
+    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive. Hair nets will be provided and must be worn at all times. We have aprons for you to borrow, or you can bring your own.<br/><br/>Best regards,<br/>Michael Brown</div>',
+    choices:[
+      'A $10 payment',
+      'Some ingredients',
+      'A hair net',
+      'An apron'
+    ],
+    correct:0,
+    explanation:'Correct: A. The email states there is a $10 fee payable when you arrive. Choice B is wrong because ingredients are provided (covered by the $10 fee). Choice C is wrong because hair nets will be provided. Choice D is wrong because aprons are available to borrow or you may bring your own, but bringing one is not required.'
+  },
+  {
+    type:'factual',
+    taskLabel:'Academic · Factual',
+    q:'According to the passage, what is one reason marine animals do not need the same supportive structures as land animals?',
+    passage:'<div class="example-box">Water is dense, about 840 times as dense as air—roughly as dense as most life forms, as they are primarily made of water. This means that marine organisms fight no battle with gravity and possess none of the structures that we need on land to combat it.</div>',
+    choices:[
+      'Marine animals are much smaller than land animals.',
+      'Water reduces the effects of gravity on marine animals\' bodies.',
+      'The thicker skin of marine animals provides sufficient support.',
+      'Animals that live in the water have more bones.'
+    ],
+    correct:1,
+    explanation:'Correct: B. The passage explains that water is much denser than air and that marine organisms are primarily made of water. Because of this, they do not struggle against gravity the way land animals do.'
+  },
+  {
+    type:'vocab',
+    taskLabel:'Academic · Vocabulary',
+    q:'The word "viable" in the passage is closest in meaning to:',
+    passage:'<div class="example-box">Researchers are also developing moonlight solar panels, which can generate electricity at night, during rain, and under overcast skies. They make renewable energy a more <b>viable</b> option in diverse environments.</div>',
+    choices:[
+      'practical',
+      'predictable',
+      'valuable',
+      'adaptable'
+    ],
+    correct:0,
+    explanation:'Correct: A. "Viable" means capable of working successfully; feasible. "Practical" is the closest synonym. Test: "...a more practical option in diverse environments" preserves the meaning.'
+  },
+  {
+    type:'infer',
+    taskLabel:'Academic · Inference',
+    q:'What can be inferred about Emma\'s semester in Japan?',
+    passage:'<div class="example-box">I can\'t believe I\'m already halfway through my exchange semester in Japan. Time really flies when you have a busy class schedule! Last weekend, after wrapping up midterms, I finally headed out of Osaka. My destination? Kyoto.</div>',
+    choices:[
+      'She is studying in Kyoto as an exchange student.',
+      'She has visited many cities across Japan in the first half of the semester.',
+      'She was too busy with coursework to travel until last weekend.',
+      'She has not spent a lot of time preparing for her midterms.'
+    ],
+    correct:2,
+    explanation:'Correct: C. Emma says she traveled "after wrapping up midterms" and that she "finally headed out" — implying she was too busy with coursework to travel before. Choice A is wrong because she\'s studying in Osaka, not Kyoto.'
+  },
+  {
+    type:'purpose',
+    taskLabel:'Academic · Rhetorical Purpose',
+    q:'Why does the author mention public baths, fountains, households, and agriculture?',
+    passage:'<div class="example-box">The aqueducts were essential to the growth and sustainability of Roman cities. They supplied water for public baths, fountains, households, and agriculture.</div>',
+    choices:[
+      'To imply that the construction of Roman aqueducts required a lot of effort',
+      'To indicate that Roman cities needed more water than aqueducts could provide',
+      'To emphasize the rapid growth and impressive sustainability of Roman cities',
+      'To explain the usefulness of Roman aqueducts'
+    ],
+    correct:3,
+    explanation:'Correct: D. The list of uses (baths, fountains, households, agriculture) serves to explain WHAT the aqueducts were used for — their usefulness. The previous sentence establishes they were "essential," and this sentence elaborates on why.'
+  },
+  {
+    type:'insert',
+    taskLabel:'Academic · Insert Text',
+    q:'Where would this sentence best fit? "This meant that the source of the water had to be higher than the city to which it was brought."',
+    passage:'<div class="example-box">The Romans, in particular, perfected the construction of aqueducts, using gravity to carry water over long distances. [A] Roman aqueducts were made of stone, brick, and concrete and included tunnels, bridges, and pipes. [B] The aqueducts were essential to the growth and sustainability of Roman cities. [C] They supplied water for public baths, fountains, households, and agriculture. [D]</div>',
+    choices:[
+      'Location A',
+      'Location B',
+      'Location C',
+      'Location D'
+    ],
+    correct:0,
+    explanation:'Correct: A. The inserted sentence begins with "This meant that..." — "This" refers to "using gravity to carry water." If aqueducts use gravity, then the water source must be higher than the destination. Location A is correct because it follows the sentence about gravity.'
+  },
+  {
+    type:'neg',
+    taskLabel:'Academic · Negative Factual',
+    q:'What does NOT occur inside PV cells?',
+    passage:'<div class="example-box">When sunlight hits the PV cell, it is absorbed by a semiconductor material, usually silicon. The energy from the light knocks electrons loose from atoms, creating a flow of electric current. This current is then captured and can be used to power electrical devices. A common misconception is that, at night, PV cells store energy like a battery. In fact, they convert sunlight into electricity in real time; to store energy, a separate energy storage system, like a battery, is required.</div>',
+    choices:[
+      'Silicon or another material absorbs sunlight.',
+      'Electrons become less tightly bound to atoms.',
+      'A flow of electric current is captured.',
+      'Electricity is stored in a battery.'
+    ],
+    correct:3,
+    explanation:'Correct: D. The passage explicitly states that PV cells do NOT store electricity like a battery; instead, they convert sunlight into electricity in real time, and a separate storage system is needed. Choices A, B, and C are all explicitly stated as occurring inside PV cells.'
+  },
+  {
+    type:'simplify',
+    taskLabel:'Academic · Sentence Simplification',
+    q:'Which best expresses the essential information: "However, constructing and maintaining aqueducts required significant resources and labor. Despite these challenges, aqueducts were essential investments in ancient infrastructure and played a crucial role in development."?',
+    choices:[
+      'Aqueducts were expensive to build and maintain, but they were essential for ancient development.',
+      'Ancient civilizations avoided building aqueducts because they were too costly.',
+      'Aqueducts were only built in wealthy civilizations that could afford them.',
+      'The labor required to build aqueducts was provided by enslaved people.'
+    ],
+    correct:0,
+    explanation:'Correct: A. The core meaning: (1) aqueducts required significant resources/labor (expensive), (2) despite this, they were essential investments. Choice A captures both clauses. B inverts the meaning. C and D add information not in the original.'
+  },
+  {
+    type:'ref',
+    taskLabel:'Academic · Reference',
+    q:'The word "they" in the passage refers to:',
+    passage:'<div class="example-box">When cities replace forests and fields with impervious surfaces, <b>they</b> lose these cooling mechanisms.</div>',
+    choices:[
+      'Forests and fields',
+      'Rural areas',
+      'Cities',
+      'Impervious surfaces'
+    ],
+    correct:2,
+    explanation:'Correct: C. The sentence subject is "cities" (implied by "When cities replace..."). The pronoun "they" refers back to the subject performing the action — cities.'
+  },
+  {
+    type:'select',
+    taskLabel:'Academic · Select the Sentence (NEW 2026)',
+    q:'Click the sentence that explains HOW tall buildings contribute to the urban heat island effect:',
+    passage:'<div class="example-box space-y-2"><div>A. Asphalt, concrete, and brick have low albedo, meaning they reflect less sunlight and absorb more heat.</div><div>B. Additionally, the geometry of tall buildings creates urban canyons that trap heat and block wind flow, reducing natural cooling.</div><div>C. Vehicles, industrial facilities, and air conditioning systems release waste heat into the atmosphere.</div><div>D. Trees and plants provide shade and release water vapor through evapotranspiration.</div></div>',
+    choices:['A','B','C','D'],
+    correct:1,
+    explanation:'Correct: B. Sentence B is the only one that explains HOW tall buildings contribute — through their geometry creating urban canyons that trap heat. The other sentences describe different aspects of the heat island effect.'
+  }
+];
+
+function renderPractice(){
+  const el = document.getElementById('mainContent');
+  el.innerHTML = `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">Guided Practice</h1>
+    <p class="text-[var(--muted)]">${PRACTICE_QUESTIONS.length} questions covering all task types and question types. Scaffolded feedback after every answer.</p>
+  </div>
+  <div id="practiceQuestions" class="space-y-4"></div>
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="4" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="6" data-complete="practice" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Complete & Continue →</button>
+  </div>
+</div>
+`;
+  renderPracticeQuestions();
+}
+
+function renderPracticeQuestions(){
+  const wrap = document.getElementById('practiceQuestions');
+  if(!wrap) return;
+  wrap.innerHTML = PRACTICE_QUESTIONS.map((pq,i)=>{
+    const saved = (state.practiceAnswers && state.practiceAnswers[i]) || {};
+    return `
+<div class="glass rounded-xl p-5">
+  <div class="flex items-center gap-2 mb-2">
+    <div class="pill bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">${pq.taskLabel}</div>
+    <span class="text-xs text-[var(--muted)]">Practice ${i+1}/${PRACTICE_QUESTIONS.length}</span>
+  </div>
+  <div class="font-semibold mb-3 text-sm">${pq.q}</div>
+  ${pq.passage ? `<div class="mb-3 text-sm">${pq.passage}</div>` : ''}
+  ${pq.choices ? `
+    <div class="space-y-2" id="pqChoices-${i}">
+      ${pq.choices.map((c,ci)=>{
+        let cls = 'choice border border-[var(--line)] rounded-lg p-3 text-sm';
+        if(saved.submitted){
+          if(ci===pq.correct) cls += ' correct';
+          else if(ci===saved.answers) cls += ' wrong';
+        } else if(saved.answers===ci) cls += ' selected';
+        return `<div class="cls}" data-practice-pick="${i}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
+      }).join('')}
+    </div>
+  ` : `
+    <input type="text" data-complete-input="${i}" placeholder="Type your answers separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${saved.answers||''}"/>
+  `}
+  ${!pq.choices && saved.answers!==undefined && !saved.submitted ? `<button data-practice-submit="${i}" class="btn mt-3 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answer</button>` : ''}
+  ${pq.choices && saved.answers!==undefined && !saved.submitted ? `<button data-practice-submit="${i}" class="btn mt-3 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answer</button>` : ''}
+  ${saved.submitted ? `
+    <div class="mt-4 bg-[var(--panel-2)] border-l-4 ${saved.isCorrect?'border-[var(--ok)]':'border-[var(--err)]'} rounded-r-lg p-4 text-sm fade-in">
+      <div class="font-bold mb-1 ${saved.isCorrect?'text-[var(--ok)]':'text-[var(--err)]'}">
+        ${saved.isCorrect?'✅ Correct!':'❌ Not quite.'}
+      </div>
+      <div class="text-[var(--muted)]">${pq.explanation}</div>
+    </div>
+  `:''}
+</div>
+`;
+  }).join('');
+}
+
+function pickPractice(qi,ci){
+  const pq = PRACTICE_QUESTIONS[qi];
+  const saved = (state.practiceAnswers && state.practiceAnswers[qi]) || {};
+  if(saved.submitted) return;
+  state.practiceAnswers[qi] = {...saved, answers: ci};
+  saveState();
+  renderPracticeQuestions();
+}
+
+function submitPractice(qi){
+  const pq = PRACTICE_QUESTIONS[qi];
+  const saved = state.practiceAnswers[qi] || {};
+  let isCorrect = false;
+  let answers = saved.answers;
+  if(pq.choices){
+    isCorrect = saved.answers === pq.correct;
+  } else {
+    const input = document.querySelector(`[data-complete-input="${qi}"]`);
+    if(!input || !input.value.trim()) return;
+    answers = input.value.trim();
+    const correctWords = pq.correct.split(', ').map(w=>w.toLowerCase().trim());
+    isCorrect = correctWords.every(w => answers.toLowerCase().includes(w));
+  }
+  state.practiceAnswers[qi] = {...saved, answers, submitted:true, isCorrect};
+  saveState();
+  renderPracticeQuestions();
+}
+
+/* =========================================================
+   TEST-DAY PLAYBOOK (renamed from adaptive)
+========================================================= */
+const PLAYBOOK_HTML = `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">🎮 Test-Day Playbook</h1>
+    <p class="text-[var(--muted)]">The strategies that turn knowledge into points. Master these and walk in confident.</p>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-[var(--accent)]">⚡</span> The Two-Module Game</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="strategy-card">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="step-badge">M1</div>
+          <b>Module 1 — The Gatekeeper</b>
+        </div>
+        <div class="text-sm text-[var(--muted)] mb-2">~35 questions · 20 minutes · ~34 seconds per question</div>
+        <div class="text-sm"><b class="text-[var(--accent)]">Your performance here unlocks your ceiling.</b> A high score sends you to a harder Module 2, where you can reach Band 5.5–6.0. A low score caps you at 3.5–4.0.</div>
+      </div>
+      <div class="strategy-card">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="step-badge" style="background:var(--accent-2)">M2</div>
+          <b>Module 2 — The Finisher</b>
+        </div>
+        <div class="text-sm text-[var(--muted)] mb-2">~15 questions · 9 minutes · ~36 seconds per question</div>
+        <div class="text-sm"><b class="text-[var(--accent-2)]">You cannot go back to Module 1.</b> Once Module 2 begins, Module 1 is locked. Use the Review feature in Module 1 before advancing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-[var(--accent)]">⏱️</span> Time Budget by Question Type</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left text-xs uppercase tracking-wider text-[var(--muted)] border-b border-[var(--line)]">
+            <th class="py-2">Question Type</th><th>Time</th><th>Strategy</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[var(--line)]">
+          <tr><td class="py-2 font-semibold">Complete the Words</td><td class="mono">~30 sec</td><td class="text-[var(--muted)]">Grammar + context. Don't overthink.</td></tr>
+          <tr><td class="py-2 font-semibold">Daily Life</td><td class="mono">~45 sec</td><td class="text-[var(--muted)]">Scan for practical details. Infer carefully.</td></tr>
+          <tr><td class="py-2 font-semibold">Factual / Vocab / Reference</td><td class="mono">~30 sec</td><td class="text-[var(--muted)]">Keyword hunt. Fast POE.</td></tr>
+          <tr><td class="py-2 font-semibold">Select the Sentence</td><td class="mono">~45 sec</td><td class="text-[var(--muted)]">Functional mapping, not keyword matching.</td></tr>
+          <tr><td class="py-2 font-semibold">Sentence Simplification</td><td class="mono">~60 sec</td><td class="text-[var(--muted)]">+50% time. Multi-clause analysis.</td></tr>
+          <tr><td class="py-2 font-semibold">Negative Factual</td><td class="mono">~60 sec</td><td class="text-[var(--muted)]">+50% time. Verify all 4 options.</td></tr>
+          <tr><td class="py-2 font-semibold">Inference / Purpose / Insert</td><td class="mono">~45 sec</td><td class="text-[var(--muted)]">Look for logical connections.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-[var(--accent)]">🎯</span> When to Guess (and Move On)</h2>
+    <p class="text-[var(--muted)] text-sm mb-3">There's no penalty for wrong answers. An unanswered question is always worse than a guess. Use this decision tree:</p>
+    <div class="space-y-2 text-sm">
+      <div class="strategy-card">⏱️ <b>Under 20 seconds on a question?</b> — Stay. You're on track.</div>
+      <div class="strategy-card">⏱️ <b>20–40 seconds, stuck between 2 choices?</b> — Pick your best guess, flag it, move on.</div>
+      <div class="strategy-card">⏱️ <b>Over 45 seconds, no clue?</b> — Guess immediately. Never spend more than 1 minute on one question.</div>
+    </div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <h2 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="text-[var(--accent)]">💡</span> Final Insights</h2>
+    <div class="space-y-3 text-sm">
+      <div class="strategy-card"><b>Module 1 is everything.</b> Accuracy here unlocks your ceiling. Don't rush — be careful.</div>
+      <div class="strategy-card"><b>Use the Review feature.</b> In Module 1, you can go back and change answers. In Module 2, you cannot.</div>
+      <div class="strategy-card"><b>Read the first sentence carefully.</b> It establishes the topic and tone for the entire passage.</div>
+      <div class="strategy-card"><b>Don't fall for same-word traps.</b> Just because a choice uses words from the passage doesn't mean it's correct.</div>
+      <div class="strategy-card"><b>Trust your first instinct.</b> Research shows your first answer is usually right. Only change if you find clear evidence.</div>
+    </div>
+  </div>
+
+  <div class="flex justify-between items-center pt-2">
+    <button data-nav="5" class="btn text-sm text-[var(--muted)] hover:text-white">← Previous</button>
+    <button data-nav="7" data-complete="playbook" class="btn bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold px-5 py-2.5 rounded-lg">Complete & Take Final Exam →</button>
+  </div>
+</div>`;
+
+/* =========================================================
+   FINAL MOCK EXAM (2 modules, 30 min, real format)
+========================================================= */
+const QUIZ_MODULE_1 = [
+  // Complete the Words (2)
+  {
+    type:'complete', module:1,
+    q:'Fill in the missing letters:',
+    passage:'The extinction of the golden toad, a brightly colored amphibian once found in the cloud forests of Costa Rica, serves as a poignant example of the fragility of tropical ecosystems. The golden toad\'s last confirmed sighting was in 1989. Scientists bel<span class="word-slot">__</span>ve its dec<span class="word-slot">__</span>ne is d<span class="word-slot">__</span> to hab<span class="word-slot">__</span>tat destruction, chan<span class="word-slot">__</span>ing weather patt<span class="word-slot">__</span>ns, and dis<span class="word-slot">__</span>ase caused by a type of fungus.',
+    correct:'believe, decline, due, habitat, changing, patterns, disease',
+    explanation:'Each word is determined by context (extinction, decline) and grammar (due to, habitat destruction, changing patterns, disease caused by).'
+  },
+  // Daily Life (2)
+  {
+    type:'daily', module:1,
+    q:'What can be inferred about Maria Lopez\'s spot in the class?',
+    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive.<br/><br/>Best regards,<br/>Michael Brown</div>',
+    choices:[
+      'She is currently on the waiting list.',
+      'She will lose her spot if she does not respond to this email.',
+      'She will secure her spot after she pays a fee.',
+      'She has indicated to Michael Brown that she cannot attend.'
+    ],
+    correct:1,
+    explanation:'Correct: B. The email states "To secure your spot, respond to this email to confirm your registration." This implies she will lose her spot if she does not respond.'
+  },
+  {
+    type:'daily', module:1,
+    q:'What must Maria Lopez take to the class?',
+    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive. Hair nets will be provided and must be worn at all times. We have aprons for you to borrow, or you can bring your own.<br/><br/>Best regards,<br/>Michael Brown</div>',
+    choices:[
+      'A $10 payment',
+      'Some ingredients',
+      'A hair net',
+      'An apron'
+    ],
+    correct:0,
+    explanation:'Correct: A. The email states there is a $10 fee payable when you arrive. Hair nets are provided, aprons are optional to borrow or bring.'
+  },
+  // Academic Passage 1 (5 questions)
+  {
+    type:'vocab', module:1,
+    q:'The word "feats" in the passage is closest in meaning to:',
+    passage:'<div class="example-box">Aqueducts are among the most impressive engineering <b>feats</b> of ancient civilizations.</div>',
+    choices:['examples','achievements','skills','investments'],
+    correct:1,
+    explanation:'Correct: B. "Feats" means remarkable achievements. The context describes aqueducts as impressive engineering accomplishments.'
+  },
+  {
+    type:'purpose', module:1,
+    q:'Why does the author mention public baths, fountains, households, and agriculture?',
+    passage:'<div class="example-box">The aqueducts were essential to the growth and sustainability of Roman cities. They supplied water for public baths, fountains, households, and agriculture.</div>',
+    choices:[
+      'To imply that the construction of Roman aqueducts required a lot of effort',
+      'To indicate that Roman cities needed more water than aqueducts could provide',
+      'To emphasize the rapid growth and impressive sustainability of Roman cities',
+      'To explain the usefulness of Roman aqueducts'
+    ],
+    correct:3,
+    explanation:'Correct: D. The list of uses serves to explain WHAT the aqueducts were used for — their usefulness.'
+  },
+  {
+    type:'factual', module:1,
+    q:'What specific ancient structure is mentioned in the passage as still existing today?',
+    passage:'<div class="example-box">One famous example is the Pont du Gard in France. Built in the first century A.D., it spans 50 kilometers and features a three-tiered bridge that remains standing today.</div>',
+    choices:['A tunnel','A bridge','A fountain','A channel'],
+    correct:1,
+    explanation:'Correct: B. The Pont du Gard is described as a "three-tiered bridge that remains standing today."'
+  },
+  {
+    type:'neg', module:1,
+    q:'What problem with ancient aqueducts is mentioned in the passage?',
+    passage:'<div class="example-box">However, constructing and maintaining aqueducts required significant resources and labor. Despite these challenges, aqueducts were essential investments in ancient infrastructure and played a crucial role in development.</div>',
+    choices:[
+      'The environmental damage they caused by using groundwater',
+      'The limited amount of water they could provide',
+      'Their frequent lack of durability',
+      'The cost and effort of building and maintaining them'
+    ],
+    correct:3,
+    explanation:'Correct: D. The passage states that constructing and maintaining aqueducts "required significant resources and labor," indicating the cost and effort involved.'
+  },
+  {
+    type:'insert', module:1,
+    q:'Where would this sentence best fit? "This meant that the source of the water had to be higher than the city to which it was brought."',
+    passage:'<div class="example-box">The Romans, in particular, perfected the construction of aqueducts, using gravity to carry water over long distances. [A] Roman aqueducts were made of stone, brick, and concrete and included tunnels, bridges, and pipes. [B] The aqueducts were essential to the growth and sustainability of Roman cities. [C] They supplied water for public baths, fountains, households, and agriculture. [D]</div>',
+    choices:['Location A','Location B','Location C','Location D'],
+    correct:0,
+    explanation:'Correct: A. "This" refers to "using gravity to carry water." If aqueducts use gravity, then the water source must be higher than the destination.'
+  }
+];
+
+const QUIZ_MODULE_2 = [
+  // Complete the Words (1)
+  {
+    type:'complete', module:2,
+    q:'Fill in the missing letters:',
+    passage:'Urbanization is the transformation of rural areas into urban ones. Social geo<span class="word-slot">__</span>raphy studies these changes and helps us understand urban<span class="word-slot">__</span>ation\'s impli<span class="word-slot">__</span>ations on human soc<span class="word-slot">__</span>ties. Unlike geography, which examines landscapes, climates, and natural hazards, social geography focuses on the inte<span class="word-slot">__</span>ction between society and landscapes.',
+    correct:'graphy, ization, cations, ieties, raction',
+    explanation:'Each word is determined by context (social geography, urbanization, implications, societies, interaction) and grammar (noun forms, prefixes/suffixes).'
+  },
+  // Academic Passage 2 (5 questions)
+  {
+    type:'purpose', module:2,
+    q:'Why does the author mention Élisée Reclus and Frédéric Le Play?',
+    passage:'<div class="example-box">The term "social geography" was first used by French geographer Élisée Reclus and by followers of the French sociologist Frédéric Le Play, possibly independently of each other, at the end of the nineteenth century.</div>',
+    choices:[
+      'To identify the origins of social geography as a field of study',
+      'To suggest that social geography has evolved significantly over the years',
+      'To contrast the differences between geography and social geography',
+      'To explain the existence of two independent schools of thought within the field of social geography'
+    ],
+    correct:0,
+    explanation:'Correct: A. The passage states that the term "social geography" was first used by these individuals, identifying the origins of the field.'
+  },
+  {
+    type:'factual', module:2,
+    q:'According to the passage, increased population densities result in:',
+    passage:'<div class="example-box">As cities grow, they attract people from rural areas seeking employment and better living conditions. This migration leads to higher population densities, affecting social relationships and community structures. Dense populations can foster anonymity, as the sheer number of people in urban environments often reduces the likelihood of repeated interactions with the same individuals.</div>',
+    choices:[
+      'sharp declines in living conditions',
+      'stronger bonds with people from a common cultural background',
+      'fewer opportunities to encounter the same individuals multiple times',
+      'a reduction in access to resources like healthcare'
+    ],
+    correct:2,
+    explanation:'Correct: C. The passage states that dense populations "reduce the likelihood of repeated interactions with the same individuals."'
+  },
+  {
+    type:'vocab', module:2,
+    q:'The word "disparities" in the passage is closest in meaning to:',
+    passage:'<div class="example-box">Cities offer better access to healthcare, education, and public services than rural areas. However, this concentration can lead to <b>disparities</b>, with some urban residents benefiting more than others.</div>',
+    choices:['inequalities','difficulties','debates','shortages'],
+    correct:0,
+    explanation:'Correct: A. "Disparities" means inequalities. The context describes how some urban residents benefit more than others, indicating unequal outcomes.'
+  },
+  {
+    type:'neg', module:2,
+    q:'What is NOT mentioned in the passage as a topic included in social geography?',
+    passage:'<div class="example-box">Social geography studies these changes and helps us understand urbanization\'s implications on human societies... Social geography seeks solutions to ensure equitable resource distribution... Social geographers analyze cultural dynamics and propose measures to enhance inclusivity.</div>',
+    choices:[
+      'How society changes as a result of urbanization',
+      'How population growth affects employment',
+      'How urban resources can be distributed in a fair way',
+      'How to ensure that people from various backgrounds coexist in harmony'
+    ],
+    correct:1,
+    explanation:'Correct: B. The passage does not discuss how population growth affects employment. It addresses urbanization\'s effects on society, resource distribution, and inclusivity.'
+  },
+  {
+    type:'insert', module:2,
+    q:'Where would this sentence best fit? "It alters how people interact with the landscape and with each other."',
+    passage:'<div class="example-box">Urbanization is the transformation of rural areas into urban ones. [A] Social geography studies these changes and helps us understand urbanization\'s implications on human societies. Unlike geography, which examines landscapes, climates, and natural hazards, social geography focuses on the interaction between society and landscapes. The term "social geography" was first used by French geographer Élisée Reclus and by followers of the French sociologist Frédéric Le Play, possibly independently of each other, at the end of the nineteenth century. [B]</div>',
+    choices:['Location A','Location B','Location C','Location D'],
+    correct:0,
+    explanation:'Correct: A. "It" refers to "urbanization" in the first sentence. The inserted sentence logically follows the definition of urbanization, explaining its effects.'
+  }
+];
+
+const ALL_QUIZ = [...QUIZ_MODULE_1, ...QUIZ_MODULE_2];
+
+let quizTimerInterval = null;
+
+function renderQuiz(){
+  const el = document.getElementById('mainContent');
+  if(!state.quiz){
+    state.quiz = {
+      currentModule: 1,
+      answers: {},
+      module1TimeLeft: 20*60,
+      module2TimeLeft: 10*60,
+      module1Submitted: false,
+      module2Submitted: false,
+      finished: false
+    };
+    saveState();
+  }
+
+  const q = state.quiz;
+  const currentQuestions = q.currentModule === 1 ? QUIZ_MODULE_1 : QUIZ_MODULE_2;
+  const timeLeft = q.currentModule === 1 ? q.module1TimeLeft : q.module2TimeLeft;
+  const isModule1Done = q.module1Submitted;
+
+  el.innerHTML = `
+<div class="fade-in space-y-5">
+  <div class="glass rounded-2xl p-6">
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-bold mb-1">🏆 Final Mock Exam</h1>
+        <p class="text-[var(--muted)]">Full simulated exam · 2 modules · 30 minutes total</p>
+      </div>
+      <div class="text-right">
+        <div class="text-xs text-[var(--muted)]">Module ${q.currentModule} of 2</div>
+        <div id="quizTimer" class="timer-display ${timeLeft<60?'warning':''}">${formatTime(timeLeft)}</div>
+      </div>
+    </div>
+  </div>
+
+  ${q.currentModule === 1 ? `
+    <div class="quiz-module-header">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <div class="font-bold text-lg">Module 1 — The Gatekeeper</div>
+          <div class="text-sm text-[var(--muted)]">${QUIZ_MODULE_1.length} questions · 20 minutes</div>
+        </div>
+        <div class="text-sm text-[var(--accent)]">⚡ Your performance here determines Module 2 difficulty</div>
+      </div>
+    </div>
+  ` : `
+    <div class="quiz-module-header" style="border-color:var(--accent-2)">
+      <div class="flex items-center justify-between flex-wrap gap-2">
+        <div>
+          <div class="font-bold text-lg">Module 2 — The Finisher</div>
+          <div class="text-sm text-[var(--muted)]">${QUIZ_MODULE_2.length} questions · 10 minutes</div>
+        </div>
+        <div class="text-sm text-[var(--accent-2)]">🎯 You cannot return to Module 1</div>
+      </div>
+    </div>
+  `}
+
+  <div class="grid lg:grid-cols-[1fr_300px] gap-5">
+    <div id="quizQuestions" class="space-y-4"></div>
+
+    <div class="space-y-4">
+      <div class="glass rounded-xl p-4 sticky top-20">
+        <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-3">Question Navigator</div>
+        <div class="grid grid-cols-5 gap-2 mb-4" id="quizNav"></div>
+        ${q.currentModule === 1 && !isModule1Done ? `
+          <button id="submitModule1Btn" class="btn w-full bg-[var(--accent)] hover:bg-[var(--accent)]/90 text-[var(--bg)] font-semibold py-2.5 rounded-lg">Submit Module 1 →</button>
+        ` : ''}
+        ${q.currentModule === 2 && !q.module2Submitted ? `
+          <button id="submitModule2Btn" class="btn w-full bg-[var(--accent-2)] hover:bg-[var(--accent-2)]/90 text-[var(--bg)] font-semibold py-2.5 rounded-lg">Submit Module 2 & Finish</button>
+        ` : ''}
+        ${q.finished ? `
+          <div class="text-center text-sm text-[var(--ok)] font-semibold">✓ Exam Complete</div>
+        ` : ''}
+      </div>
+    </div>
+  </div>
+
+  <div id="quizResults" class="${q.finished?'':'hidden'}"></div>
+</div>
+`;
+
+  renderQuizQuestions();
+  renderQuizNav();
+  if(!q.finished) startQuizTimer();
+  else renderQuizResults();
+}
+
+function formatTime(seconds){
+  const m = Math.floor(seconds/60);
+  const s = seconds%60;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function startQuizTimer(){
+  if(state.quiz.finished) return;
+  clearInterval(quizTimerInterval);
+  updateTimerDisplay();
+  quizTimerInterval = setInterval(()=>{
+    if(state.quiz.currentModule === 1){
+      state.quiz.module1TimeLeft--;
+      if(state.quiz.module1TimeLeft <= 0){
+        submitModule1();
+        return;
+      }
+    } else {
+      state.quiz.module2TimeLeft--;
+      if(state.quiz.module2TimeLeft <= 0){
+        submitModule2();
+        return;
+      }
+    }
+    saveState();
+    updateTimerDisplay();
+  },1000);
+}
+
+function updateTimerDisplay(){
+  const el = document.getElementById('quizTimer');
+  if(!el) return;
+  const timeLeft = state.quiz.currentModule === 1 ? state.quiz.module1TimeLeft : state.quiz.module2TimeLeft;
+  el.textContent = formatTime(timeLeft);
+  if(timeLeft < 60) el.classList.add('warning');
+  else el.classList.remove('warning');
+}
+
+function renderQuizNav(){
+  const nav = document.getElementById('quizNav');
+  if(!nav) return;
+  const currentQuestions = state.quiz.currentModule === 1 ? QUIZ_MODULE_1 : QUIZ_MODULE_2;
+  const baseIndex = state.quiz.currentModule === 1 ? 0 : QUIZ_MODULE_1.length;
+  nav.innerHTML = currentQuestions.map((q,i)=>{
+    const globalIndex = baseIndex + i;
+    const answered = state.quiz.answers[globalIndex] !== undefined;
+    const cls = answered ? 'bg-[var(--accent)] text-[var(--bg)]' : 'bg-[var(--panel-2)] text-[var(--muted)] hover:bg-[var(--accent)]/30';
+    return `<button data-quiz-scroll="${globalIndex}" class="aspect-square rounded-lg font-bold text-sm ${cls}">${i+1}</button>`;
+  }).join('');
+}
+
+function scrollToQ(i){
+  const el = document.getElementById('qq-'+i);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function renderQuizQuestions(){
+  const wrap = document.getElementById('quizQuestions');
+  if(!wrap) return;
+  const currentQuestions = state.quiz.currentModule === 1 ? QUIZ_MODULE_1 : QUIZ_MODULE_2;
+  const baseIndex = state.quiz.currentModule === 1 ? 0 : QUIZ_MODULE_1.length;
+
+  wrap.innerHTML = currentQuestions.map((q,i)=>{
+    const globalIndex = baseIndex + i;
+    return `
+<div id="qq-${globalIndex}" class="glass rounded-xl p-5">
+  <div class="flex items-center gap-2 mb-3">
+    <div class="pill bg-[var(--accent)]/15 text-[var(--accent)] border border-[var(--accent)]/30">${q.type.charAt(0).toUpperCase()+q.type.slice(1)}</div>
+    <span class="text-xs text-[var(--muted)]">Question ${i+1}/${currentQuestions.length}</span>
+  </div>
+  <div class="font-semibold mb-3 text-sm">${q.q}</div>
+  ${q.passage ? `<div class="mb-3 text-sm">${q.passage}</div>` : ''}
+  ${q.choices ? `
+    <div class="space-y-2">
+      ${q.choices.map((c,ci)=>{
+        let cls = 'choice border border-[var(--line)] rounded-lg p-3 text-sm';
+        if(state.quiz.answers[globalIndex]===ci) cls += ' selected';
+        return `<div class="${cls}" data-quiz-pick="${globalIndex}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
+      }).join('')}
+    </div>
+  ` : `
+    <input type="text" data-quiz-complete="${globalIndex}" placeholder="Type your answers separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${state.quiz.answers[globalIndex]||''}"/>
+  `}
+</div>
+`;
+  }).join('');
+}
+
+function pickQuiz(qi,ci){
+  if(state.quiz.finished) return;
+  state.quiz.answers[qi] = ci;
+  saveState();
+  renderQuizQuestions();
+  renderQuizNav();
+}
+
+function submitModule1(){
+  // Save any text inputs
+  document.querySelectorAll('[data-quiz-complete]').forEach(input=>{
+    const idx = parseInt(input.dataset.quizComplete);
+    if(input.value.trim()){
+      state.quiz.answers[idx] = input.value.trim();
+    }
+  });
+  state.quiz.module1Submitted = true;
+  state.quiz.currentModule = 2;
+  saveState();
+  render();
+}
+
+function submitModule2(){
+  // Save any text inputs
+  document.querySelectorAll('[data-quiz-complete]').forEach(input=>{
+    const idx = parseInt(input.dataset.quizComplete);
+    if(input.value.trim()){
+      state.quiz.answers[idx] = input.value.trim();
+    }
+  });
+  state.quiz.module2Submitted = true;
+  state.quiz.finished = true;
+  clearInterval(quizTimerInterval);
+  saveState();
+  render();
+  renderQuizResults();
+  renderSidebar();
+  updateStats();
+  setTimeout(()=>{
+    const el = document.getElementById('quizResults');
+    if(el) el.scrollIntoView({behavior:'smooth'});
+  },200);
+}
+
+function renderQuizResults(){
+  const el = document.getElementById('quizResults');
+  if(!state.quiz.finished){ el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+
+  let correct = 0;
+  let module1Correct = 0;
+  let module2Correct = 0;
+  const breakdown = {};
+
+  QUIZ_MODULE_1.forEach((q,i)=>{
+    const user = state.quiz.answers[i];
+    let ok = false;
+    if(q.choices){
+      ok = user === q.correct;
+    } else {
+      if(typeof user === 'string'){
+        const correctWords = q.correct.split(', ').map(w=>w.toLowerCase().trim());
+        ok = correctWords.every(w => user.toLowerCase().includes(w));
+      }
+    }
+    if(ok){ correct++; module1Correct++; }
+    breakdown[i] = { ok, type:q.type, module:1 };
+  });
+
+  QUIZ_MODULE_2.forEach((q,i)=>{
+    const globalIndex = QUIZ_MODULE_1.length + i;
+    const user = state.quiz.answers[globalIndex];
+    let ok = false;
+    if(q.choices){
+      ok = user === q.correct;
+    } else {
+      if(typeof user === 'string'){
+        const correctWords = q.correct.split(', ').map(w=>w.toLowerCase().trim());
+        ok = correctWords.every(w => user.toLowerCase().includes(w));
+      }
+    }
+    if(ok){ correct++; module2Correct++; }
+    breakdown[globalIndex] = { ok, type:q.type, module:2 };
+  });
+
+  const total = ALL_QUIZ.length;
+  const pct = correct/total;
+  let band;
+  if(pct>=0.95) band = 6.0;
+  else if(pct>=0.85) band = 5.5;
+  else if(pct>=0.75) band = 5.0;
+  else if(pct>=0.60) band = 4.5;
+  else if(pct>=0.45) band = 4.0;
+  else if(pct>=0.30) band = 3.5;
+  else if(pct>=0.20) band = 3.0;
+  else if(pct>=0.10) band = 2.5;
+  else band = 2.0;
+
+  const bandColor = band>=5?'text-[var(--ok)]':band>=4?'text-[var(--accent-2)]':band>=3?'text-[var(--warn)]':'text-[var(--err)]';
+
+  el.innerHTML = `
+<div class="fade-in space-y-5 mt-5">
+  <div class="glass rounded-2xl p-6 bg-gradient-to-br from-[var(--accent)]/10 to-[var(--accent-2)]/10 border border-[var(--accent)]/30">
+    <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-2">Your Result</div>
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div>
+        <div class="text-5xl font-bold ${bandColor} mono">${band.toFixed(1)}</div>
+        <div class="text-sm text-[var(--muted)] mt-1">Estimated Reading Band (1–6)</div>
+      </div>
+      <div class="text-right">
+        <div class="text-2xl font-bold mono">${correct}/${total}</div>
+        <div class="text-sm text-[var(--muted)]">Correct · ${Math.round(pct*100)}%</div>
+      </div>
+    </div>
+    <div class="mt-4 grid sm:grid-cols-2 gap-3">
+      <div class="strategy-card">
+        <div class="text-xs text-[var(--muted)] mb-1">Module 1</div>
+        <div class="font-bold text-lg">${module1Correct}/${QUIZ_MODULE_1.length}</div>
+      </div>
+      <div class="strategy-card" style="border-left-color:var(--accent-2)">
+        <div class="text-xs text-[var(--muted)] mb-1">Module 2</div>
+        <div class="font-bold text-lg">${module2Correct}/${QUIZ_MODULE_2.length}</div>
+      </div>
+    </div>
+    <div class="mt-4 text-sm text-[var(--muted)]">${bandFeedback(band)}</div>
+  </div>
+
+  <div class="glass rounded-xl p-5">
+    <div class="text-xs uppercase tracking-wider text-[var(--accent)] mb-3">Detailed Review</div>
+    <div class="space-y-3">
+      ${ALL_QUIZ.map((q,i)=>{
+        const b = breakdown[i];
+        return `
+<details class="bg-[var(--panel-2)] rounded-lg overflow-hidden">
+  <summary class="p-3 flex items-center justify-between cursor-pointer hover:bg-[var(--bg)]">
+    <div class="flex items-center gap-2">
+      <span class="${b.ok?'text-[var(--ok)]':'text-[var(--err)]'} font-bold">${b.ok?'✅':'❌'}</span>
+      <span class="text-sm font-semibold">Q${i+1} · ${q.type} · Module ${b.module}</span>
+    </div>
+    <span class="text-xs text-[var(--muted)]">Click to expand</span>
+  </summary>
+  <div class="p-4 pt-0 text-sm space-y-2 border-t border-[var(--line)] mt-0">
+    <div class="pt-3 font-semibold">${q.q}</div>
+    ${q.choices ? q.choices.map((c,ci)=>{
+      let cls = 'border rounded-lg p-2 text-sm';
+      let mark = '';
+      const isCorrect = ci===q.correct;
+      const isUser = state.quiz.answers[i]===ci;
+      if(isCorrect){ cls += ' border-[var(--ok)] bg-[var(--ok)]/10'; mark = '✅ Correct answer'; }
+      else if(isUser){ cls += ' border-[var(--err)] bg-[var(--err)]/10'; mark = '❌ Your answer'; }
+      else { cls += ' border-[var(--line)] opacity-60'; }
+      return `<div class="${cls}">${String.fromCharCode(65+ci)}. ${c}${mark?' · <b>'+mark+'</b>':''}</div>`;
+    }).join('') : `<div class="text-xs text-[var(--muted)]">Your answer: ${state.quiz.answers[i] || '(none)'}</div>`}
+    <div class="bg-[var(--bg)] border-l-2 border-[var(--accent)] rounded-r-lg p-3 text-[var(--muted)]">
+      <b class="text-[var(--accent)]">Explanation:</b> ${q.explanation}
+    </div>
+  </div>
+</details>
+`;
+      }).join('')}
+    </div>
+  </div>
+</div>
+`;
+}
+
+function bandFeedback(band){
+  if(band>=5.5) return "🌟 <b>Outstanding.</b> You're operating at an advanced/proficient level. Focus on polishing speed and the hardest inference questions.";
+  if(band>=4.5) return "👍 <b>Strong.</b> You have solid upper-intermediate skills. Target your weakest question types and practice under timed conditions.";
+  if(band>=3.5) return "📈 <b>Good foundation.</b> You understand the basics but need to strengthen vocabulary-in-context and inference skills. Revisit Lesson 3 strategies.";
+  if(band>=3.0) return "📚 <b>Developing.</b> Focus on the fundamentals: skimming strategies (Lesson 3) and question type recognition (Lesson 2). Retake the quiz after review.";
+  return "🌱 <b>Starting out.</b> No worries — that's what this course is for! Go through Lessons 1–4 carefully, do the Guided Practice again, then retake the quiz.";
+}
+
+/* =========================================================
+   SIDEBAR & STATS
+========================================================= */
+function renderSidebar(){
+  const nav = document.getElementById('lessonNav');
+  if(!nav) return;
+  nav.innerHTML = LESSONS.map((l,i)=>{
+    const done = state.completed[l.id];
+    const active = state.currentLesson===i;
+    return `
+<button data-nav="${i}" class="lesson-card text-left px-3 py-2.5 rounded-lg border border-transparent flex items-center gap-3 ${active?'active':''} ${done?'done':''}">
+  <span class="text-lg">${l.icon}</span>
+  <div class="flex-1 min-w-0">
+    <div class="text-xs text-[var(--muted)]">Lesson ${i+1}</div>
+    <div class="text-sm font-semibold truncate">${l.title}</div>
+  </div>
+  ${done?'<span class="text-[var(--ok)] text-xs">✓</span>':''}
+</button>
+`;
+  }).join('');
+}
+
+function updateStats(){
+  const staticDone = ['format','tasks','questions','strategies','playbook'].filter(k=>state.completed[k]).length;
+  const practiceDone = state.practiceAnswers ? Object.values(state.practiceAnswers).filter(p=>p.submitted).length : 0;
+  document.getElementById('statLessons').textContent = `${staticDone}/5`;
+  document.getElementById('statPractices').textContent = `${Math.min(practiceDone,PRACTICE_QUESTIONS.length)}/${PRACTICE_QUESTIONS.length}`;
+  document.getElementById('statFinal').textContent = state.quiz?.finished ? '✓' : '—';
+  const total = 5 + PRACTICE_QUESTIONS.length + 1;
+  const done = staticDone + Math.min(practiceDone,PRACTICE_QUESTIONS.length) + (state.quiz?.finished?1:0);
+  const pct = Math.round(done/total*100);
+  const gp = document.getElementById('globalProgress');
+  const gpt = document.getElementById('globalProgressText');
+  if(gp) gp.style.width = pct+'%';
+  if(gpt) gpt.textContent = pct+'%';
+}
+
+/* =========================================================
+   MAIN RENDER
+========================================================= */
+function render(){
+  renderSidebar();
+  const lesson = LESSONS[state.currentLesson];
+  const main = document.getElementById('mainContent');
+  if(!main) return;
+
+  if(lesson.type==='static'){
+    if(lesson.id==='welcome') main.innerHTML = WELCOME_HTML;
+    else if(lesson.id==='format') main.innerHTML = FORMAT_HTML;
+    else if(lesson.id==='tasks') main.innerHTML = renderTasksLesson();
+    else if(lesson.id==='questions') main.innerHTML = renderQuestionsLesson();
+    else if(lesson.id==='strategies') main.innerHTML = STRATEGIES_HTML;
+    else if(lesson.id==='playbook') main.innerHTML = PLAYBOOK_HTML;
+  } else if(lesson.type==='practice'){
+    renderPractice();
+  } else if(lesson.type==='quiz'){
+    renderQuiz();
+  }
+  updateStats();
+}
+
+/* =========================================================
+   EVENT DELEGATION
+========================================================= */
+document.addEventListener('click', function(e){
+  // Navigation
+  const target = e.target.closest('[data-nav]');
+  if(target){
+    const i = parseInt(target.dataset.nav);
+    if(!isNaN(i)){
+      if(target.dataset.complete){
+        completeAndNext(target.dataset.complete, i);
+      } else {
+        goToLesson(i);
+      }
+    }
+    return;
+  }
+
+  // Task tabs
+  const taskTab = e.target.closest('[data-task-tab]');
+  if(taskTab){
+    currentTask = parseInt(taskTab.dataset.taskTab);
+    render();
+    return;
+  }
+
+  // Task practice picks
+  const taskPick = e.target.closest('[data-task-pick]');
+  if(taskPick){
+    const [ti, ci] = taskPick.dataset.taskPick.split('-').map(Number);
+    const t = TASKS_DATA[ti];
+    const feedback = document.getElementById(`taskFeedback-${ti}`);
+    if(!feedback) return;
+    // Highlight
+    document.querySelectorAll(`[data-task-pick^="${ti}-"]`).forEach(el=>{
+      el.classList.remove('correct','wrong');
+    });
+    if(ci === t.practice.correct){
+      taskPick.classList.add('correct');
+      feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${t.practice.feedback}</div>`;
+    } else {
+      taskPick.classList.add('wrong');
+      document.querySelector(`[data-task-pick="${ti}-${t.practice.correct}"]`)?.classList.add('correct');
+      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> ${t.practice.feedback}</div>`;
+    }
+    return;
+  }
+
+  // Task text input submit
+  const taskSubmit = e.target.closest('[data-task-submit]');
+  if(taskSubmit){
+    const ti = parseInt(taskSubmit.dataset.taskSubmit);
+    const t = TASKS_DATA[ti];
+    const input = document.querySelector(`[data-task-input="${ti}"]`);
+    const feedback = document.getElementById(`taskFeedback-${ti}`);
+    if(!input || !feedback) return;
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctWords = t.practice.answers.map(w=>w.toLowerCase());
+    const allCorrect = correctWords.every(w => userAnswer.includes(w));
+    if(allCorrect){
+      feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${t.practice.feedback}</div>`;
+    } else {
+      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> Correct answers: ${t.practice.answers.join(', ')}. ${t.practice.feedback}</div>`;
+    }
+    return;
+  }
+
+  // Question type tabs
+  const qtypeTab = e.target.closest('[data-qtype-tab]');
+  if(qtypeTab){
+    currentQType = parseInt(qtypeTab.dataset.qtypeTab);
+    render();
+    return;
+  }
+
+  // Question type practice picks
+  const qtypePick = e.target.closest('[data-qtype-pick]');
+  if(qtypePick){
+    const [qi, ci] = qtypePick.dataset.qtypePick.split('-').map(Number);
+    const q = QTYPES[qi];
+    const feedback = document.getElementById(`qtypeFeedback-${qi}`);
+    if(!feedback) return;
+    document.querySelectorAll(`[data-qtype-pick^="${qi}-"]`).forEach(el=>{
+      el.classList.remove('correct','wrong');
+    });
+    if(ci === q.practice.correct){
+      qtypePick.classList.add('correct');
+      feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${q.practice.feedback}</div>`;
+    } else {
+      qtypePick.classList.add('wrong');
+      document.querySelector(`[data-qtype-pick="${qi}-${q.practice.correct}"]`)?.classList.add('correct');
+      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> ${q.practice.feedback}</div>`;
+    }
+    return;
+  }
+
+  // Practice picks
+  const practicePick = e.target.closest('[data-practice-pick]');
+  if(practicePick){
+    const [qi, ci] = practicePick.dataset.practicePick.split('-').map(Number);
+    if(!isNaN(qi) && !isNaN(ci)) pickPractice(qi, ci);
+    return;
+  }
+
+  // Practice submit
+  const practiceSubmit = e.target.closest('[data-practice-submit]');
+  if(practiceSubmit){
+    const qi = parseInt(practiceSubmit.dataset.practiceSubmit);
+    if(!isNaN(qi)) submitPractice(qi);
+    return;
+  }
+
+  // Quiz picks
+  const quizPick = e.target.closest('[data-quiz-pick]');
+  if(quizPick){
+    const [qi, ci] = quizPick.dataset.quizPick.split('-').map(Number);
+    if(!isNaN(qi) && !isNaN(ci)) pickQuiz(qi, ci);
+    return;
+  }
+
+  // Quiz scroll
+  const quizScroll = e.target.closest('[data-quiz-scroll]');
+  if(quizScroll){
+    const i = parseInt(quizScroll.dataset.quizScroll);
+    if(!isNaN(i)) scrollToQ(i);
+    return;
+  }
+
+  // Quiz complete inputs - save on change
+  const quizComplete = e.target.closest('[data-quiz-complete]');
+  if(quizComplete){
+    const idx = parseInt(quizComplete.dataset.quizComplete);
+    state.quiz.answers[idx] = quizComplete.value.trim();
+    saveState();
+    return;
+  }
+
+  // Submit Module 1
+  if(e.target.id === 'submitModule1Btn'){
+    if(confirm('Submit Module 1 and proceed to Module 2? You cannot return to Module 1.')){
+      submitModule1();
+    }
+    return;
+  }
+
+  // Submit Module 2
+  if(e.target.id === 'submitModule2Btn'){
+    const answered = Object.keys(state.quiz.answers).filter(k => {
+      const idx = parseInt(k);
+      return idx >= QUIZ_MODULE_1.length && state.quiz.answers[k] !== undefined && state.quiz.answers[k] !== '';
+    }).length;
+    if(answered < QUIZ_MODULE_2.length){
+      if(!confirm(`You've answered ${answered}/${QUIZ_MODULE_2.length} questions in Module 2. Submit anyway?`)) return;
+    }
+    submitModule2();
+    return;
+  }
+
+  // Reset
+  if(e.target.id === 'resetBtn'){
+    if(!confirm('Reset all progress? This cannot be undone.')) return;
+    state = {...defaultState};
+    saveState();
+    render();
+    return;
+  }
+});
+
+// Save quiz complete inputs on blur
+document.addEventListener('blur', function(e){
+  if(e.target.matches('[data-quiz-complete]')){
+    const idx = parseInt(e.target.dataset.quizComplete);
+    state.quiz.answers[idx] = e.target.value.trim();
+    saveState();
+  }
+}, true);
+
+/* =========================================================
+   INIT
+========================================================= */
+render();
+</script>
+</body>
+</html>
