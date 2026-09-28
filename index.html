@@ -1884,7 +1884,7 @@ if(taskSubmit){
   if(allCorrect){
     feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${t.practice.feedback}</div>`;
   } else {
-    feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> Correct answers: ${t.practice.answers.join(', ')}. ${t.practice.feedback}</div>`;
+    feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]"> </b> Correct answers: ${t.practice.answers.join(', ')}. ${t.practice.feedback}</div>`;
   }
   return;
 }
