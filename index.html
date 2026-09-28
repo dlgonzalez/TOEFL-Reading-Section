@@ -116,7 +116,10 @@
 /* =========================================================
    STATE
 ========================================================= */
-const STORAGE_KEY = 'toefl-reading-mastery-v4';
+// v6: Guided Practice content was replaced with a fresh item set. Saved answers
+// from older versions refer to different questions, so they are cleared on load.
+const STORAGE_KEY = 'toefl-reading-mastery-v6';
+const LEGACY_STORAGE_KEYS = ['toefl-reading-mastery-v4', 'toefl-reading-mastery-v5'];
 const defaultState = {
   currentLesson: 0,
   completed: {},
@@ -124,12 +127,33 @@ const defaultState = {
   quiz: null
 };
 let state;
+let freshInstall = false;
 try {
   const raw = localStorage.getItem(STORAGE_KEY);
   state = raw ? {...defaultState, ...JSON.parse(raw)} : {...defaultState};
-} catch(e) { state = {...defaultState}; }
+  freshInstall = !raw;
+} catch(e) { state = {...defaultState}; freshInstall = true; }
 
 function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){} }
+
+// Migrate progress from older versions, but drop saved Guided Practice answers:
+// the item set was replaced, so old selections refer to different questions and
+// would otherwise be locked in as permanently "Not quite."
+if(freshInstall){
+  try{
+    for(const key of LEGACY_STORAGE_KEYS){
+      const legacyRaw = localStorage.getItem(key);
+      if(!legacyRaw) continue;
+      const legacy = JSON.parse(legacyRaw);
+      state.completed = {...(legacy.completed||{}), ...(state.completed||{})};
+      state.quiz = state.quiz || legacy.quiz || null;
+      state.currentLesson = typeof legacy.currentLesson === 'number' ? legacy.currentLesson : state.currentLesson;
+      state.practiceAnswers = {}; // reset — items were replaced
+      localStorage.removeItem(key);
+    }
+    saveState();
+  }catch(e){}
+}
 
 /* =========================================================
    LESSONS
@@ -140,7 +164,7 @@ const LESSONS = [
   { id:'tasks', title:'3 Task Types Deep Dive', icon:'📚', type:'static' },
   { id:'questions', title:'9 Question Types + Practice', icon:'🧩', type:'static' },
   { id:'strategies', title:'Reading Strategies', icon:'🧠', type:'static' },
-  { id:'practice', title:'Guided Practice', icon:'✍️', type:'practice' },
+  { id:'practice', title:'Guided Practice · Mixed Set', icon:'✍️', type:'practice' },
   { id:'playbook', title:'Test-Day Playbook', icon:'🎮', type:'static' },
   { id:'final', title:'Final Mock Exam', icon:'🏆', type:'quiz' }
 ];
@@ -914,160 +938,160 @@ const STRATEGIES_HTML = `
 ========================================================= */
 const PRACTICE_QUESTIONS = [
   {
-  type:'complete',
-  taskLabel:'Complete the Words',
-  q:'Fill in the missing letters. Type the COMPLETE word for each blank, separated by commas.',
-  passage:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">____</span> a br<span class="word-slot">___</span> range of behav<span class="word-slot">____</span>, fr<span class="word-slot">__</span> foraging to complex soc<span class="word-slot">___</span> organization. For inst<span class="word-slot">____</span>, bees perform intr<span class="word-slot">_____</span> dances to communicate the location of food sources.',
-  correct:'exhibit, broad, behaviors, from, social, instance, intricate',
-  explanation:'Each missing word is determined by both meaning and grammar. "Exhibit" means to display. "Broad" describes the wide variety. "Behaviors" is the plural noun. "From" introduces the starting point. "Social" describes organization among insects. "Instance" completes "for instance". "Intricate" describes the complex nature of the dances.'
-},
-  {
-    type:'daily',
-    taskLabel:'Daily Life · Inference',
-    q:'What can be inferred about Maria Lopez\'s spot in the class?',
-    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive.<br/><br/>Best regards,<br/>Michael Brown</div>',
-    choices:[
-      'She is currently on the waiting list.',
-      'She will lose her spot if she does not respond to this email.',
-      'She will secure her spot after she pays a fee.',
-      'She has indicated to Michael Brown that she cannot attend.'
-    ],
-    correct:1,
-    explanation:'Correct: B. The email states "To secure your spot, respond to this email to confirm your registration." This implies she will lose her spot if she does not respond. Choice A is wrong because the email says there IS a waiting list, not that Maria is on it.'
+    type:'complete',
+    taskLabel:'Complete the Words',
+    q:'Fill in the missing letters. Type the COMPLETE word for each blank, separated by commas.',
+    passage:'Deep-sea vents support thriving communities in the dark ocean. Specialized bacteria ob<span class="word-slot">____</span> chemicals from the vent fluid as their primary ener<span class="word-slot">__</span> source. This pro<span class="word-slot">_____</span>, called chemosynthesis, sus<span class="word-slot">______</span> entire ecosystems that never re<span class="word-slot">____</span> sunlight. Sci<span class="word-slot">_________</span> first dis<span class="word-slot">_______</span> these vent communities in 1977.',
+    correct:'obtain, energy, process, sustains, require, Scientists, discovered',
+    explanation:'Each missing word is determined by both meaning and grammar. "Obtain" means to get or acquire. "Energy" completes "energy source." "Process" names what chemosynthesis is. "Sustains" is the singular verb matching "This process." "Require" fits the negative "never require sunlight." "Scientists" is the plural subject. "Discovered" is the past-tense verb matching the year 1977.'
   },
   {
     type:'daily',
     taskLabel:'Daily Life · Factual',
-    q:'What must Maria Lopez take to the class?',
-    passage:'<div class="example-box"><b>Subject:</b> Cooking class<br/><br/>Maria Lopez,<br/><br/>Thank you for your interest in the Foster Dining Hall cooking class. There is currently a waiting list for this popular event. To secure your spot, respond to this email to confirm your registration.<br/><br/>There is a $10 fee for the use of equipment and ingredients, payable when you arrive. Hair nets will be provided and must be worn at all times. We have aprons for you to borrow, or you can bring your own.<br/><br/>Best regards,<br/>Michael Brown</div>',
+    q:'According to the notice, what must students bring to the photography workshop?',
+    passage:'<div class="example-box"><b>Workshop Notice: Introduction to Film Photography</b><br/><br/>Saturday, March 8 · 2:00–5:00 p.m. · Room 214, Art Building<br/><br/>All materials, including film, cameras, and chemistry sets, will be provided during the session. Seating is limited to fifteen participants, so advance registration through the campus portal is required. Please bring a notebook; the instructor will assign short exercises to complete between sessions.<br/><br/>— Campus Arts Program</div>',
     choices:[
-      'A $10 payment',
-      'Some ingredients',
-      'A hair net',
-      'An apron'
+      'A camera',
+      'A notebook',
+      'Film and chemistry supplies',
+      'A registration fee'
+    ],
+    correct:1,
+    explanation:'Correct: B. The notice says "Please bring a notebook." Choices A and C are wrong because cameras, film, and chemistry sets will be provided. Choice D is wrong because no fee is mentioned — only advance registration through the campus portal.'
+  },
+  {
+    type:'daily',
+    taskLabel:'Daily Life · Inference',
+    q:'What can be inferred about the workshop from the notice?',
+    passage:'<div class="example-box"><b>Workshop Notice: Introduction to Film Photography</b><br/><br/>Saturday, March 8 · 2:00–5:00 p.m. · Room 214, Art Building<br/><br/>All materials, including film, cameras, and chemistry sets, will be provided during the session. Seating is limited to fifteen participants, so advance registration through the campus portal is required. Please bring a notebook; the instructor will assign short exercises to complete between sessions.<br/><br/>— Campus Arts Program</div>',
+    choices:[
+      'It will continue beyond a single meeting.',
+      'It will be held outdoors.',
+      'Participants must pay for the materials.',
+      'Anyone can attend without signing up in advance.'
     ],
     correct:0,
-    explanation:'Correct: A. The email states there is a $10 fee payable when you arrive. Choice B is wrong because ingredients are provided (covered by the $10 fee). Choice C is wrong because hair nets will be provided. Choice D is wrong because aprons are available to borrow or you may bring your own, but bringing one is not required.'
+    explanation:'Correct: A. The notice mentions "exercises to complete between sessions," implying the workshop includes more than one session. Choice B is wrong because it is held in Room 214. Choice C is wrong because materials are provided at no stated cost. Choice D is wrong because advance registration is required.'
   },
   {
     type:'factual',
-    taskLabel:'Academic · Factual',
-    q:'According to the passage, what is one reason marine animals do not need the same supportive structures as land animals?',
-    passage:'<div class="example-box">Water is dense, about 840 times as dense as air—roughly as dense as most life forms, as they are primarily made of water. This means that marine organisms fight no battle with gravity and possess none of the structures that we need on land to combat it.</div>',
+    taskLabel:'Academic · Factual Information',
+    q:'According to the passage, why did maritime nations adopt paper money later than China?',
+    passage:'<div class="example-box">China introduced paper currency during the Tang dynasty, chiefly because copper coins were heavy and difficult to transport in large transactions. Maritime nations, by contrast, relied on coinage minted from precious metals, whose value travelers could verify anywhere along established trade routes. Only when merchant banks began issuing transferable notes did European economies find unbacked paper acceptable.</div>',
     choices:[
-      'Marine animals are much smaller than land animals.',
-      'Water reduces the effects of gravity on marine animals\' bodies.',
-      'The thicker skin of marine animals provides sufficient support.',
-      'Animals that live in the water have more bones.'
+      'Their trade routes depended on metal coins whose value could be verified anywhere.',
+      'They lacked the technology to print durable banknotes.',
+      'Their governments prohibited the use of foreign currencies.',
+      'Merchant banks refused to issue transferable notes.'
     ],
-    correct:1,
-    explanation:'Correct: B. The passage explains that water is much denser than air and that marine organisms are primarily made of water. Because of this, they do not struggle against gravity the way land animals do.'
+    correct:0,
+    explanation:'Correct: A. The passage states maritime nations relied on precious-metal coinage "whose value travelers could verify anywhere along established trade routes," removing the incentive to switch. Choice B is not mentioned. Choice C contradicts the passage. Choice D reverses the text: it was precisely when merchant banks began issuing notes that paper became acceptable.'
   },
   {
     type:'vocab',
     taskLabel:'Academic · Vocabulary',
-    q:'The word "viable" in the passage is closest in meaning to:',
-    passage:'<div class="example-box">Researchers are also developing moonlight solar panels, which can generate electricity at night, during rain, and under overcast skies. They make renewable energy a more <b>viable</b> option in diverse environments.</div>',
+    q:'The word "scarce" in the passage is closest in meaning to:',
+    passage:'<div class="example-box">As urban expansion consumes surrounding farmland, arable soil becomes increasingly <b>scarce</b>, forcing planners to look toward vertical farms and hydroponic systems.</div>',
     choices:[
-      'practical',
-      'predictable',
-      'valuable',
-      'adaptable'
+      'expensive',
+      'limited',
+      'polluted',
+      'unproductive'
     ],
-    correct:0,
-    explanation:'Correct: A. "Viable" means capable of working successfully; feasible. "Practical" is the closest synonym. Test: "...a more practical option in diverse environments" preserves the meaning.'
+    correct:1,
+    explanation:'Correct: B. "Scarce" means insufficient in supply — not readily available. "Limited" is the closest synonym. Substitution test: "arable soil becomes increasingly limited" preserves the meaning; "expensive," "polluted," and "unproductive" change it.'
   },
   {
     type:'infer',
     taskLabel:'Academic · Inference',
-    q:'What can be inferred about Emma\'s semester in Japan?',
-    passage:'<div class="example-box">I can\'t believe I\'m already halfway through my exchange semester in Japan. Time really flies when you have a busy class schedule! Last weekend, after wrapping up midterms, I finally headed out of Osaka. My destination? Kyoto.</div>',
+    q:'What can be inferred about the researcher\'s fieldwork season?',
+    passage:'<div class="example-box">By late July the snowline had retreated above our camp, opening the upper pass two weeks earlier than in any season on record. We had packed supplies for a six-week survey, yet the melt forced us to redistribute samples to partner stations and cut the expedition short.</div>',
     choices:[
-      'She is studying in Kyoto as an exchange student.',
-      'She has visited many cities across Japan in the first half of the semester.',
-      'She was too busy with coursework to travel until last weekend.',
-      'She has not spent a lot of time preparing for her midterms.'
+      'The team completed its survey ahead of schedule thanks to the early thaw.',
+      'Unusually early melting disrupted plans that assumed normal conditions.',
+      'The partner stations declined to help redistribute the samples.',
+      'The survey was conducted entirely below the snowline.'
     ],
-    correct:2,
-    explanation:'Correct: C. Emma says she traveled "after wrapping up midterms" and that she "finally headed out" — implying she was too busy with coursework to travel before. Choice A is wrong because she\'s studying in Osaka, not Kyoto.'
+    correct:1,
+    explanation:'Correct: B. The record-early retreat of the snowline "forced us to... cut the expedition short," showing the unusual melt disrupted the six-week plan. Choice A contradicts the text — the expedition was shortened, not finished smoothly. Choice C adds information not in the passage. Choice D ignores that the team used the upper pass.'
   },
   {
     type:'purpose',
     taskLabel:'Academic · Rhetorical Purpose',
-    q:'Why does the author mention public baths, fountains, households, and agriculture?',
-    passage:'<div class="example-box">The aqueducts were essential to the growth and sustainability of Roman cities. They supplied water for public baths, fountains, households, and agriculture.</div>',
+    q:'Why does the author mention the 1995 discovery of planets around pulsars?',
+    passage:'<div class="example-box">The search for worlds beyond our solar system long suffered from a credibility problem: every claimed detection had collapsed under scrutiny. That changed in 1995, when observations confirmed a giant planet orbiting a Sun-like star, and the field finally gained the funding and institutional support its practitioners had sought for decades.</div>',
     choices:[
-      'To imply that the construction of Roman aqueducts required a lot of effort',
-      'To indicate that Roman cities needed more water than aqueducts could provide',
-      'To emphasize the rapid growth and impressive sustainability of Roman cities',
-      'To explain the usefulness of Roman aqueducts'
+      'To argue that pulsars are poor hosts for planetary systems',
+      'To show that earlier detections were later proven correct',
+      'To mark the turning point that gave the field lasting legitimacy',
+      'To explain why astronomers preferred studying pulsars over Sun-like stars'
     ],
-    correct:3,
-    explanation:'Correct: D. The list of uses (baths, fountains, households, agriculture) serves to explain WHAT the aqueducts were used for — their usefulness. The previous sentence establishes they were "essential," and this sentence elaborates on why.'
+    correct:2,
+    explanation:'Correct: C. The discovery is presented as the moment ("That changed in 1995") when a field plagued by failed claims gained credibility, funding, and support. Choice A misreads the emphasis. Choice B contradicts "every claimed detection had collapsed." Choice D invents a preference not stated in the text.'
   },
   {
     type:'insert',
     taskLabel:'Academic · Insert Text',
-    q:'Where would this sentence best fit? "This meant that the source of the water had to be higher than the city to which it was brought."',
-    passage:'<div class="example-box">The Romans, in particular, perfected the construction of aqueducts, using gravity to carry water over long distances. [A] Roman aqueducts were made of stone, brick, and concrete and included tunnels, bridges, and pipes. [B] The aqueducts were essential to the growth and sustainability of Roman cities. [C] They supplied water for public baths, fountains, households, and agriculture. [D]</div>',
+    q:'Where would this sentence best fit? "This discipline, however, came at a cost: kilns fired at such high temperatures consumed enormous quantities of fuel."',
+    passage:'<div class="example-box">Porcelain production reached new heights during the Yuan dynasty, as potters mastered glazes that survived firing above 1,200 degrees Celsius. [A] Their wares, exported along maritime routes, became prized across Asia and the Middle East. [B] The technical demands shaped where workshops could operate, since they needed both clay deposits and abundant timber. [C] Forests near major production centers were stripped within generations. [D]</div>',
     choices:[
       'Location A',
       'Location B',
       'Location C',
       'Location D'
     ],
-    correct:0,
-    explanation:'Correct: A. The inserted sentence begins with "This meant that..." — "This" refers to "using gravity to carry water." If aqueducts use gravity, then the water source must be higher than the destination. Location A is correct because it follows the sentence about gravity.'
+    correct:1,
+    explanation:'Correct: B. The inserted sentence introduces the fuel cost of high-temperature firing with "however," contrasting the praised exports before it. It connects forward to Location C\'s sentence about workshops needing "abundant timber" and to the deforestation that followed. Placing it at A or D would break the topic chain.'
   },
   {
     type:'neg',
     taskLabel:'Academic · Negative Factual',
-    q:'What does NOT occur inside PV cells?',
-    passage:'<div class="example-box">When sunlight hits the PV cell, it is absorbed by a semiconductor material, usually silicon. The energy from the light knocks electrons loose from atoms, creating a flow of electric current. This current is then captured and can be used to power electrical devices. A common misconception is that, at night, PV cells store energy like a battery. In fact, they convert sunlight into electricity in real time; to store energy, a separate energy storage system, like a battery, is required.</div>',
+    q:'All of the following are mentioned as features of burrow microclimates EXCEPT:',
+    passage:'<div class="example-box">Burrows buffer their occupants against surface extremes. Temperatures underground remain remarkably stable across seasons, humidity stays high even during droughts, and predators struggle to reach nests deep in the tunnel system. Burrows do not, however, shield residents from every threat: flooding after heavy rains remains the leading cause of nest failure, and carbon dioxide can accumulate in poorly ventilated chambers.</div>',
     choices:[
-      'Silicon or another material absorbs sunlight.',
-      'Electrons become less tightly bound to atoms.',
-      'A flow of electric current is captured.',
-      'Electricity is stored in a battery.'
+      'Stable temperatures across seasons',
+      'High humidity even during droughts',
+      'Protection from flooding after heavy rains',
+      'Difficulty for predators reaching deep nests'
     ],
-    correct:3,
-    explanation:'Correct: D. The passage explicitly states that PV cells do NOT store electricity like a battery; instead, they convert sunlight into electricity in real time, and a separate storage system is needed. Choices A, B, and C are all explicitly stated as occurring inside PV cells.'
+    correct:2,
+    explanation:'Correct: C. The passage explicitly says burrows do NOT shield residents from flooding — it remains the leading cause of nest failure. Choices A, B, and D are all directly stated as benefits of burrow microclimates.'
   },
   {
     type:'simplify',
     taskLabel:'Academic · Sentence Simplification',
-    q:'Which best expresses the essential information: "However, constructing and maintaining aqueducts required significant resources and labor. Despite these challenges, aqueducts were essential investments in ancient infrastructure and played a crucial role in development."?',
+    q:'Which best expresses the essential information: "Although the printing press drastically lowered the cost of books, censorship boards in several states continued to license printers, so the spread of printed ideas remained uneven well into the eighteenth century."?',
     choices:[
-      'Aqueducts were expensive to build and maintain, but they were essential for ancient development.',
-      'Ancient civilizations avoided building aqueducts because they were too costly.',
-      'Aqueducts were only built in wealthy civilizations that could afford them.',
-      'The labor required to build aqueducts was provided by enslaved people.'
+      'Because books became cheap, censorship boards immediately lost all power over printing.',
+      'Printing became cheaper, but state licensing of printers kept the diffusion of printed ideas uneven for a long time.',
+      'Censorship boards lowered book prices in order to encourage licensed printing across several states.',
+      'Printers in most European states refused to accept licenses, causing book prices to rise.'
     ],
-    correct:0,
-    explanation:'Correct: A. The core meaning: (1) aqueducts required significant resources/labor (expensive), (2) despite this, they were essential investments. Choice A captures both clauses. B inverts the meaning. C and D add information not in the original.'
+    correct:1,
+    explanation:'Correct: B. The core meaning: (1) printing lowered book costs, (2) yet censorship/licensing persisted, so (3) the spread of ideas stayed uneven. Choice B keeps all three links. A inverts the result. C confuses cause and effect. D adds information not in the original.'
   },
   {
     type:'ref',
     taskLabel:'Academic · Reference',
-    q:'The word "they" in the passage refers to:',
-    passage:'<div class="example-box">When cities replace forests and fields with impervious surfaces, <b>they</b> lose these cooling mechanisms.</div>',
+    q:'The word "these" in the passage refers to:',
+    passage:'<div class="example-box">Early sound films recorded dialogue with stationary microphones placed at fixed points on the set. Actors had to speak toward <b>these</b> while staying inside the narrow frame of the new cameras, which severely limited movement.</div>',
     choices:[
-      'Forests and fields',
-      'Rural areas',
-      'Cities',
-      'Impervious surfaces'
+      'the fixed microphones',
+      'the actors',
+      'the cameras',
+      'the frames of the shot'
     ],
-    correct:2,
-    explanation:'Correct: C. The sentence subject is "cities" (implied by "When cities replace..."). The pronoun "they" refers back to the subject performing the action — cities.'
+    correct:0,
+    explanation:'Correct: A. The preceding sentence introduces "stationary microphones placed at fixed points"; actors speaking "toward these" naturally refers back to those microphones. Cameras and frames are mentioned only after "these" appears in the logic of the scene, and actors cannot speak toward themselves.'
   },
   {
     type:'select',
     taskLabel:'Academic · Select the Sentence (NEW 2026)',
-    q:'Click the sentence that explains HOW tall buildings contribute to the urban heat island effect:',
-    passage:'<div class="example-box space-y-2"><div>A. Asphalt, concrete, and brick have low albedo, meaning they reflect less sunlight and absorb more heat.</div><div>B. Additionally, the geometry of tall buildings creates urban canyons that trap heat and block wind flow, reducing natural cooling.</div><div>C. Vehicles, industrial facilities, and air conditioning systems release waste heat into the atmosphere.</div><div>D. Trees and plants provide shade and release water vapor through evapotranspiration.</div></div>',
+    q:'Click the sentence that explains WHY ice cores are useful records of past atmospheres:',
+    passage:'<div class="example-box space-y-2"><div>A. Ice cores are long cylinders of frozen water drilled from glaciers and polar ice sheets.</div><div>B. As snow accumulates year after year, it compresses into ice while trapping tiny bubbles of the surrounding air.</div><div>C. Researchers transport the cores to laboratories where they are stored at sub-zero temperatures.</div><div>D. The oldest cores recovered to date preserve ice formed more than two million years ago.</div></div>',
     choices:['A','B','C','D'],
     correct:1,
-    explanation:'Correct: B. Sentence B is the only one that explains HOW tall buildings contribute — through their geometry creating urban canyons that trap heat. The other sentences describe different aspects of the heat island effect.'
+    explanation:'Correct: B. Sentence B gives the mechanism — accumulating snow traps bubbles of ancient air — which is exactly why ice cores serve as atmospheric records. Sentence A merely defines cores, C describes handling, and D states their age.'
   }
 ];
 
@@ -1076,7 +1100,7 @@ function renderPractice(){
   el.innerHTML = `
 <div class="fade-in space-y-5">
   <div class="glass rounded-2xl p-6">
-    <h1 class="text-2xl sm:text-3xl font-bold mb-2">Guided Practice</h1>
+    <h1 class="text-2xl sm:text-3xl font-bold mb-2">Guided Practice · Mixed Set</h1>
     <p class="text-[var(--muted)]">${PRACTICE_QUESTIONS.length} questions covering all task types and question types. Scaffolded feedback after every answer.</p>
   </div>
   <div id="practiceQuestions" class="space-y-4"></div>
@@ -1102,6 +1126,12 @@ function renderPracticeQuestions(){
   </div>
   <div class="font-semibold mb-3 text-sm">${pq.q}</div>
   ${pq.passage ? `<div class="mb-3 text-sm">${pq.passage}</div>` : ''}
+  ${!pq.choices && !saved.submitted ? `
+    <div class="text-xs text-[var(--muted)] mb-2 bg-[var(--panel-2)] border-l-2 border-[var(--accent)] rounded p-3">
+      💡 <b>Instructions:</b> Each blank shows the first few letters of a word. Count the underscores — each underscore = one missing letter. Type the <b>COMPLETE word</b> for each blank, separated by commas.<br/>
+      <span class="mono text-[var(--accent)]">Example:</span> <span class="mono">ob<span class="word-slot">____</span> → type "obtain" (4 missing letters: t, a, i, n)</span>
+    </div>
+  ` : ''}
   ${pq.choices ? `
     <div class="space-y-2" id="pqChoices-${i}">
       ${pq.choices.map((c,ci)=>{
@@ -1110,20 +1140,25 @@ function renderPracticeQuestions(){
           if(ci===pq.correct) cls += ' correct';
           else if(ci===saved.answers) cls += ' wrong';
         } else if(saved.answers===ci) cls += ' selected';
-        return `<div class="cls}" data-practice-pick="${i}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
+        return `<div class="${cls}" data-practice-pick="${i}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
       }).join('')}
     </div>
   ` : `
-    <input type="text" data-complete-input="${i}" placeholder="Type your answers separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${saved.answers||''}"/>
+    <input type="text" data-complete-input="${i}" placeholder="Type complete words separated by commas (e.g., obtain, energy, process)..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${saved.answers||''}"${saved.submitted?' readonly':''}/>
   `}
-  ${!pq.choices && saved.answers!==undefined && !saved.submitted ? `<button data-practice-submit="${i}" class="btn mt-3 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answer</button>` : ''}
-  ${pq.choices && saved.answers!==undefined && !saved.submitted ? `<button data-practice-submit="${i}" class="btn mt-3 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answer</button>` : ''}
+  ${!saved.submitted ? (()=>{
+      if(pq.choices){
+        return `<button data-practice-submit="${i}" class="btn mt-3 px-4 py-1.5 rounded text-sm font-semibold ${saved.answers!==undefined?'bg-[var(--accent)] text-[var(--bg)]':'bg-[var(--panel-2)] text-[var(--muted)] cursor-not-allowed'}">Check Answer</button>`;
+      }
+      return `<button data-practice-submit="${i}" class="btn mt-3 bg-[var(--accent)] text-[var(--bg)] px-4 py-1.5 rounded text-sm font-semibold">Check Answer</button>`;
+    })() : ''}
   ${saved.submitted ? `
     <div class="mt-4 bg-[var(--panel-2)] border-l-4 ${saved.isCorrect?'border-[var(--ok)]':'border-[var(--err)]'} rounded-r-lg p-4 text-sm fade-in">
       <div class="font-bold mb-1 ${saved.isCorrect?'text-[var(--ok)]':'text-[var(--err)]'}">
         ${saved.isCorrect?'✅ Correct!':'❌ Not quite.'}
       </div>
       <div class="text-[var(--muted)]">${pq.explanation}</div>
+      ${!saved.isCorrect ? `<button data-practice-retry="${i}" class="btn mt-3 px-4 py-1.5 rounded text-sm font-semibold bg-[var(--panel)] border border-[var(--accent)]/50 text-[var(--accent)]">↺ Try Again</button>` : ''}
     </div>
   `:''}
 </div>
@@ -1146,17 +1181,28 @@ function submitPractice(qi){
   let isCorrect = false;
   let answers = saved.answers;
   if(pq.choices){
+    if(saved.answers === undefined) return; // must pick an option first
     isCorrect = saved.answers === pq.correct;
   } else {
     const input = document.querySelector(`[data-complete-input="${qi}"]`);
     if(!input || !input.value.trim()) return;
     answers = input.value.trim();
-    const correctWords = pq.correct.split(', ').map(w=>w.toLowerCase().trim());
-    isCorrect = correctWords.every(w => answers.toLowerCase().includes(w));
+    // Split on commas / whitespace so extra spaces ("behaviors , from") still work
+    const userWords = answers.toLowerCase().split(/[\s,]+/).map(w=>w.trim()).filter(Boolean);
+    const correctWords = pq.correct.split(',').map(w=>w.toLowerCase().trim()).filter(Boolean);
+    isCorrect = correctWords.every(w => userWords.includes(w));
   }
   state.practiceAnswers[qi] = {...saved, answers, submitted:true, isCorrect};
   saveState();
   renderPracticeQuestions();
+  updateStats();
+}
+
+function resetPractice(qi){
+  delete state.practiceAnswers[qi];
+  saveState();
+  renderPracticeQuestions();
+  updateStats();
 }
 
 /* =========================================================
@@ -1931,6 +1977,14 @@ if(taskSubmit){
   if(practiceSubmit){
     const qi = parseInt(practiceSubmit.dataset.practiceSubmit);
     if(!isNaN(qi)) submitPractice(qi);
+    return;
+  }
+
+  // Practice retry (clear a wrong answer and try again)
+  const practiceRetry = e.target.closest('[data-practice-retry]');
+  if(practiceRetry){
+    const qi = parseInt(practiceRetry.dataset.practiceRetry);
+    if(!isNaN(qi)) resetPractice(qi);
     return;
   }
 
