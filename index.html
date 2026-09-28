@@ -329,8 +329,8 @@ const TASKS_DATA = [
       '<b>Context traps:</b> Words that fit grammatically but change the meaning.'
     ],
     practice:{
-      q:'Fill in the missing letters:',
-      text:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">___</span> a br<span class="word-slot">___</span> range of behav<span class="word-slot">___</span>, fr<span class="word-slot">___</span> foraging to complex soc<span class="word-slot">___</span> organization. For inst<span class="word-slot">___</span>, bees perform intr<span class="word-slot">___</span> dances to communicate the location of food sources.',
+      q:'Fill in the missing letters. Type the COMPLETE word for each blank (e.g., "exhibit" not just "hibit").',
+      text:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">____</span>it a br<span class="word-slot">___</span>ad range of behav<span class="word-slot">____</span>ors, fr<span class="word-slot">__</span>m foraging to complex soc<span class="word-slot">___</span>al organization. For inst<span class="word-slot">____</span>nce, bees perform intr<span class="word-slot">_____</span>cate dances to communicate the location of food sources.',
       answers:['hibit','oad','iors','om','ial','ance','icate'],
       feedback:'Correct answers: exhibit, broad, behaviors, from, social, instance, intricate. The given letters at the start of each word provide clues. Use context (insects displaying behaviors) and grammar (adjectives before nouns, prepositions linking phrases) to complete each word.'
     }
@@ -914,13 +914,13 @@ const STRATEGIES_HTML = `
 ========================================================= */
 const PRACTICE_QUESTIONS = [
   {
-    type:'complete',
-    taskLabel:'Complete the Words',
-    q:'Fill in the missing letters:',
-    passage:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">__</span> a br<span class="word-slot">__</span> range of behav<span class="word-slot">__</span>, fr<span class="word-slot">__</span> foraging to complex soc<span class="word-slot">__</span> organization. For inst<span class="word-slot">__</span>, bees perform intr<span class="word-slot">__</span> dances to communicate the location of food sources.',
-    correct:'exhibit, broad, behaviors, from, social, instance, intricate',
-    explanation:'Each missing word is determined by both meaning and grammar. "Exhibit" means to display. "Broad" describes the wide variety. "Behaviors" is the plural noun. "From" introduces the starting point. "Social" describes organization among insects. "Instance" completes "for instance". "Intricate" describes the complex nature of the dances.'
-  },
+  type:'complete',
+  taskLabel:'Complete the Words',
+  q:'Fill in the missing letters. Type the COMPLETE word for each blank (e.g., "exhibit" not just "hibit").',
+  passage:'The study of animal behavior provides insight into complex ecosystems. Insects exh<span class="word-slot">____</span>it a br<span class="word-slot">___</span>ad range of behav<span class="word-slot">____</span>ors, fr<span class="word-slot">__</span>m foraging to complex soc<span class="word-slot">___</span>al organization. For inst<span class="word-slot">____</span>nce, bees perform intr<span class="word-slot">_____</span>cate dances to communicate the location of food sources.',
+  correct:'exhibit, broad, behaviors, from, social, instance, intricate',
+  explanation:'Each missing word is determined by both meaning and grammar. "Exhibit" means to display. "Broad" describes the wide variety. "Behaviors" is the plural noun. "From" introduces the starting point. "Social" describes organization among insects. "Instance" completes "for instance". "Intricate" describes the complex nature of the dances.'
+},
   {
     type:'daily',
     taskLabel:'Daily Life · Inference',
@@ -1247,10 +1247,10 @@ const QUIZ_MODULE_1 = [
   // Complete the Words (2)
   {
     type:'complete', module:1,
-    q:'Fill in the missing letters:',
-    passage:'The extinction of the golden toad, a brightly colored amphibian once found in the cloud forests of Costa Rica, serves as a poignant example of the fragility of tropical ecosystems. The golden toad\'s last confirmed sighting was in 1989. Scientists bel<span class="word-slot">__</span> its dec<span class="word-slot">__</span> is d<span class="word-slot">__</span> to hab<span class="word-slot">__</span> destruction, chan<span class="word-slot">__</span> weather patt<span class="word-slot">__</span>, and dis<span class="word-slot">__</span> caused by a type of fungus.',
-    correct:'believe, decline, due, habitat, changing, patterns, disease',
-    explanation:'Each word is determined by context (extinction, decline) and grammar (due to, habitat destruction, changing patterns, disease caused by).'
+  q:'Fill in the missing letters. Type the COMPLETE word for each blank (e.g., "believe" not just "ieve").',
+  passage:'The extinction of the golden toad, a brightly colored amphibian once found in the cloud forests of Costa Rica, serves as a poignant example of the fragility of tropical ecosystems. The golden toad\'s last confirmed sighting was in 1989. Scientists bel<span class="word-slot">____</span> its dec<span class="word-slot">____</span> is d<span class="word-slot">__</span> to hab<span class="word-slot">____</span> destruction, chan<span class="word-slot">____</span> weather patt<span class="word-slot">____</span>, and dis<span class="word-slot">____</span> caused b<span class="word-slot">_</span> a ty<span class="word-slot">__</span> of fungus that attacks the skin of amphibians. Conservationists study the golden toad\'s demise to understand how climate factors affect amphibian populations.',
+  correct:'believe, decline, due, habitat, changing, patterns, disease, by, type',
+  explanation:'Each word is determined by context (extinction, decline) and grammar (due to, habitat destruction, changing patterns, disease caused by, type of fungus).'
   },
   // Daily Life (2)
   {
@@ -1335,12 +1335,12 @@ const QUIZ_MODULE_1 = [
 const QUIZ_MODULE_2 = [
   // Complete the Words (1)
   {
-    type:'complete', module:2,
-    q:'Fill in the missing letters:',
-    passage:'Urbanization is the transformation of rural areas into urban ones. Social geo<span class="word-slot">__</span> studies these changes and helps us understand urban<span class="word-slot">__</span>\'s impli<span class="word-slot">__</span> on human soc<span class="word-slot">__</span>. Unlike geography, which examines landscapes, climates, and natural hazards, social geography focuses on the inte<span class="word-slot">__</span> between society and landscapes.',
-    correct:'graphy, ization, cations, ieties, raction',
-    explanation:'Each word is determined by context (social geography, urbanization, implications, societies, interaction) and grammar (noun forms, prefixes/suffixes).'
-  },
+  type:'complete', module:2,
+  q:'Fill in the missing letters. Type the COMPLETE word for each blank (e.g., "Natural" not just "ural").',
+  passage:'Textile weaving is a traditional craft that involves interlacing threads to create fabric. Weavers use looms to hold the threads in place while they work. Nat<span class="word-slot">____</span> fibers li<span class="word-slot">__</span> wool, cot<span class="word-slot">___</span>, and si<span class="word-slot">__</span> are comm<span class="word-slot">____</span> used, tho<span class="word-slot">___</span> synthetic mate<span class="word-slot">_____</span> are al<span class="word-slot">__</span> popular. Techn<span class="word-slot">_____</span> such a<span class="word-slot">_</span> plain weave, twill, and satin weave produce different textures and patterns.',
+  correct:'Natural, like, cotton, silk, commonly, though, materials, also, Techniques, as',
+  explanation:'Each word is determined by context (textile weaving, natural fibers) and grammar (like, commonly used, though, materials, also, techniques such as).'
+},
   // Academic Passage 2 (5 questions)
   {
     type:'purpose', module:2,
@@ -1563,16 +1563,20 @@ function renderQuizQuestions(){
   <div class="font-semibold mb-3 text-sm">${q.q}</div>
   ${q.passage ? `<div class="mb-3 text-sm">${q.passage}</div>` : ''}
   ${q.choices ? `
-    <div class="space-y-2">
-      ${q.choices.map((c,ci)=>{
-        let cls = 'choice border border-[var(--line)] rounded-lg p-3 text-sm';
-        if(state.quiz.answers[globalIndex]===ci) cls += ' selected';
-        return `<div class="${cls}" data-quiz-pick="${globalIndex}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
-      }).join('')}
-    </div>
-  ` : `
-    <input type="text" data-quiz-complete="${globalIndex}" placeholder="Type your answers separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${state.quiz.answers[globalIndex]||''}"/>
-  `}
+  <div class="space-y-2">
+    ${q.choices.map((c,ci)=>{
+      let cls = 'choice border border-[var(--line)] rounded-lg p-3 text-sm';
+      if(state.quiz.answers[globalIndex]===ci) cls += ' selected';
+      return `<div class="${cls}" data-quiz-pick="${globalIndex}-${ci}">${String.fromCharCode(65+ci)}. ${c}</div>`;
+    }).join('')}
+  </div>
+` : `
+  <div class="text-xs text-[var(--muted)] mb-2 bg-[var(--panel-2)] border-l-2 border-[var(--accent)] rounded p-3">
+    💡 <b>Instructions:</b> Each blank shows the first few letters of a word. Count the underscores — each underscore = one missing letter. Type the <b>COMPLETE word</b> for each blank, separated by commas.<br/>
+    <span class="mono text-[var(--accent)]">Example:</span> <span class="mono">bel<span class="word-slot">____</span> → type "believe" (4 missing letters: i, e, v, e)</span>
+  </div>
+  <input type="text" data-quiz-complete="${globalIndex}" placeholder="Type complete words separated by commas..." class="w-full bg-[var(--bg)] border border-[var(--line)] rounded px-3 py-2 text-sm focus:border-[var(--accent)] focus:outline-none" value="${state.quiz.answers[globalIndex]||''}"/>
+`}
 </div>
 `;
   }).join('');
