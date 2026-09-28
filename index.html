@@ -1866,23 +1866,28 @@ document.addEventListener('click', function(e){
   }
 
   // Task text input submit
-  const taskSubmit = e.target.closest('[data-task-submit]');
-  if(taskSubmit){
-    const ti = parseInt(taskSubmit.dataset.taskSubmit);
-    const t = TASKS_DATA[ti];
-    const input = document.querySelector(`[data-task-input="${ti}"]`);
-    const feedback = document.getElementById(`taskFeedback-${ti}`);
-    if(!input || !feedback) return;
-    const userAnswer = input.value.trim().toLowerCase();
-    const correctWords = t.practice.answers.map(w=>w.toLowerCase());
-    const allCorrect = correctWords.every(w => userAnswer.includes(w));
-    if(allCorrect){
-      feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${t.practice.feedback}</div>`;
-    } else {
-      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> Correct answers: ${t.practice.answers.join(', ')}. ${t.practice.feedback}</div>`;
-    }
-    return;
+const taskSubmit = e.target.closest('[data-task-submit]');
+if(taskSubmit){
+  const ti = parseInt(taskSubmit.dataset.taskSubmit);
+  const t = TASKS_DATA[ti];
+  const input = document.querySelector(`[data-task-input="${ti}"]`);
+  const feedback = document.getElementById(`taskFeedback-${ti}`);
+  if(!input || !feedback) return;
+  
+  // Split user answer by commas, spaces, or other delimiters
+  const userWords = input.value.toLowerCase().split(/[\s,]+/).map(w => w.trim()).filter(w => w.length > 0);
+  const correctWords = t.practice.answers.map(w => w.toLowerCase());
+  
+  // Check if all correct words are present (in any order)
+  const allCorrect = correctWords.every(w => userWords.includes(w));
+  
+  if(allCorrect){
+    feedback.innerHTML = `<div class="bg-[var(--ok)]/10 border-l-4 border-[var(--ok)] rounded-r-lg p-3 text-sm"><b class="text-[var(--ok)]">✅ Correct!</b> ${t.practice.feedback}</div>`;
+  } else {
+    feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> Correct answers: ${t.practice.answers.join(', ')}. ${t.practice.feedback}</div>`;
   }
+  return;
+}
 
   // Question type tabs
   const qtypeTab = e.target.closest('[data-qtype-tab]');
