@@ -1860,7 +1860,7 @@ document.addEventListener('click', function(e){
     } else {
       taskPick.classList.add('wrong');
       document.querySelector(`[data-task-pick="${ti}-${t.practice.correct}"]`)?.classList.add('correct');
-      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> ${t.practice.feedback}</div>`;
+      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]"> </b> ${t.practice.feedback}</div>`;
     }
     return;
   }
@@ -1913,7 +1913,7 @@ if(taskSubmit){
     } else {
       qtypePick.classList.add('wrong');
       document.querySelector(`[data-qtype-pick="${qi}-${q.practice.correct}"]`)?.classList.add('correct');
-      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]">❌ Not quite.</b> ${q.practice.feedback}</div>`;
+      feedback.innerHTML = `<div class="bg-[var(--err)]/10 border-l-4 border-[var(--err)] rounded-r-lg p-3 text-sm"><b class="text-[var(--err)]"> </b> ${q.practice.feedback}</div>`;
     }
     return;
   }
